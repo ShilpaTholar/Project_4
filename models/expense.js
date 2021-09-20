@@ -7,7 +7,7 @@ const expenseSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    shopId: [{ type: ObjectId, ref: "User" }],
+    shopId: [{ type: ObjectId, ref: "Shop" }],
     productId: [{ type: ObjectId, ref: "Product" }],
 })
 

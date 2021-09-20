@@ -11,7 +11,7 @@ const areaSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    shopId: [{ type: ObjectId, ref: "User" }]
+    shopId: [{ type: ObjectId, ref: "Shop" }]
 })
 
 mongoose.model("Area", areaSchema);
