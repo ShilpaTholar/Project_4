@@ -7,7 +7,7 @@ app.use(cors())
 
 
 //connect to mongoose
-mongoose.connect("mongodb+srv://aditi-16:aditi2002@cluster0.nccwa.mongodb.net/ecart", { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false })
+mongoose.connect("mongodb+srv://aditi-16:aditi2002@cluster0.nccwa.mongodb.net/ecart", { useUnifiedTopology: true, useNewUrlParser: true })
     .then(() => console.log("Connection Successful"))
     .catch((err) => console.log(err));
 
@@ -18,6 +18,8 @@ require('./models/order')
 require('./models/product')
 require('./models/review')
 require('./models/wishlist')
+require('./models/shop')
+require('./models/cart')
 
 app.use(express.json());
 
