@@ -23,6 +23,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    shopName: {
+        type: String
+    },
+    noOfProducts: {
+        type: String
+    },
     productId: [{ type: ObjectId, ref: "Product" }]
 })
 
