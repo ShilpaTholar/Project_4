@@ -79,7 +79,8 @@ router.route("/shop/login").post((req, res) => {
 })
 
 
-router.post('user/signup', (req, res) => {
+router.post('/user/signup', (req, res) => {
+    console.log('hiii')
     const { name, password, email, address, area } = req.body
     if (!name || !password || !email || !address || !area) {
         return res.status(422).json({ error: "please add all the fields" })
