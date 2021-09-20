@@ -2,16 +2,8 @@ const { ObjectID } = require("mongodb");
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
 
-const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    password: {
+const shopSchema = new mongoose.Schema({
+    shopName: {
         type: String,
         required: true
     },
@@ -19,11 +11,21 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    area: {
+    password: {
         type: String,
         required: true
     },
-    productId: [{ type: ObjectId, ref: "Product" }]
+    email: {
+        type: String,
+        required: true
+    },
+    noOfProducts: {
+        type: String
+    },
+    area: {
+        type: String,
+        required: true
+    }
 })
 
-mongoose.model("User", userSchema);
+mongoose.model("Shop", shopSchema);

@@ -11,9 +11,23 @@ mongoose.connect("mongodb+srv://aditi-16:aditi2002@cluster0.nccwa.mongodb.net/ec
     .then(() => console.log("Connection Successful"))
     .catch((err) => console.log(err));
 
-//models
+require('./models/user')
+require('./models/area')
+require('./models/expense')
+require('./models/order')
+require('./models/product')
+require('./models/review')
+require('./models/wishlist')
+
 app.use(express.json());
-//routes
+
+app.use(require('./routes/auth'))
+app.use(require('./routes/cartRoute'))
+app.use(require('./routes/ProductRoute'))
+app.use(require('./routes/shopCreate'))
+app.use(require('./routes/shopHome'))
+app.use(require('./routes/userHome'))
+app.use(require('./routes/wishlistRoute'))
 
 
 app.listen(5000, function (req, res) {
