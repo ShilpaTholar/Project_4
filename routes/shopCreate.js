@@ -20,3 +20,5 @@ router.post('/shop/create', (req, res) => {
         })
     });
 });
+
+module.exports = router
