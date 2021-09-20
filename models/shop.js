@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
 
 const shopSchema = new mongoose.Schema({
-    shop_name: {
+    shopName: {
         type: String,
         required: true
     },
@@ -19,15 +19,13 @@ const shopSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    phone_no: {
-        type: String,
-        required: true
-    },
     noOfProducts: {
+        type: String
+    },
+    area: {
         type: String,
         required: true
-    },
-    areaId: [{ type: ObjectId, ref: "Area" }]
+    }
 })
 
 mongoose.model("Shop", shopSchema);
