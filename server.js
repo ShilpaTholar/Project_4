@@ -30,6 +30,7 @@ app.use(require('./routes/shopCreate'))
 app.use(require('./routes/shopHome'))
 app.use(require('./routes/userHome'))
 app.use(require('./routes/wishlistRoute'))
+app.use(require('./routes/userRoute'))
 
 
 app.listen(5000, function (req, res) {
