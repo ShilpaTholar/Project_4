@@ -7,16 +7,20 @@ const requirelogin = require('../middleware/requirelogin.js');
 
 //get all products from shop which belong to area of user
 
-router.get('./user/home', requirelogin, function (req, res) {
+router.get('/user/home', requirelogin, function (req, res) {
+    //console.log('in user home')
+    res.send("success");
+    // shopids = Shop.find({ area: req.user.area._id }, { _id: 1 })
 
-    shopids = Shop.find({ area: req.user.area._id }, { _id: 1 })
-
-    //getting products
-    Product.find({
-        'shopId': { $in: shopids }
-    }, function (err, docs) {
-        console.log(docs);
-    });
+    // //getting products
+    // Product.find({
+    //     'shopId': { $in: shopids }
+    // }, function (err, docs) {
+    //     if (!err) {
+    //         res.send("success!")
+    //         console.log(docs);
+    //     }
+    // });
 
 })
 
