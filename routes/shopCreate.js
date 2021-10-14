@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const Shop = mongoose.model("Shop");
 
 router.post('/shop/create', (req, res) => {
-    const Shop = new Shop({
+    const shop = new Shop({
         shopname: req.body.shopname,
         address: req.body.address,
         password: req.body.password,
@@ -13,7 +13,7 @@ router.post('/shop/create', (req, res) => {
         noOfProducts: req.body.noOfProducts,
         area: req.body.area
     });
-    Shop.save((err, data) => {
+    shop.save((err, data) => {
         res.status(200).json({
             code: 200, message: "Created",
             shopCreate: data

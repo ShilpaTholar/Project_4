@@ -4,29 +4,42 @@ const mongoose = require("mongoose");
 //const requirelogin = require('../middleware/requirelogin.js');
 const Product = mongoose.model("Product");
 
-router.post('/shop/add/:ShopId', (req,res) => {
-    const Product= new Product({
+router.post('/shop/add', (req,res) => {
+    const product= new Product({
         cost:req.body.cost,
         description:req.body.description,
         quantity:req.body.quantity,
         name:req.body.name,
-        images:req.body.images
+        shopId:req.body.shopId
     });
-    Product.save((err,data) => {
+    product.save((err,data) => {
         res.status(200).json({ code:200,message:"Added",
         addProduct:data})
     });
  });
 
- router.put('/shop/update/:ShopId/:ProductId', (req,res) => {
-    const Product= new Product({
+ router.get('/shop/display/keyword', (req,res) => {
+    Product.findByName( req.params.keyword , (err, data) => {
+        if (!err) {
+            res.send(data);
+
+        } else {
+            console.log(err);
+        }
+
+    });
+ })
+
+ router.put('/shop/update/:ProductId', (req,res) => {
+    const product={
         cost:req.body.cost,
         description:req.body.description,
         quantity:req.body.quantity,
         name:req.body.name,
-        images:req.body.images
-    });
-    User.findByIdAndUpdate(req.params.ProductId, { $set:Product}, {new:true}, (err, data) => {
+        images:req.body.images,
+        shopId:req.body.shopId
+    };
+    Product.findByIdAndUpdate(req.params.ProductId, { $set:product}, {new:true}, (err, data) => {
         if(!err){
             res.status(200).json({code:200,message:'updated',
             updateProduct:data})
@@ -36,8 +49,8 @@ router.post('/shop/add/:ShopId', (req,res) => {
     });
  });
 
- router.delete('/shop/delete/:ShopId',(req,res) => {
-    MyCart.findByIdAndRemove(req.params.ShopId, (err,data) => {
+ router.delete('/shop/delete/:ProductId',(req,res) => {
+    Product.findByIdAndRemove(req.params.ProductId, (err,data) => {
         if(!err){
             res.status(200).json({code:200, message :'deleted',
         deleteProduct:data});

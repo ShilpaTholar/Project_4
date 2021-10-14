@@ -2,12 +2,13 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require("mongoose");
 //const requirelogin = require('../middleware/requirelogin.js');
-const Recipe = mongoose.model("../models/user");
+const User = mongoose.model("User");
 
 router.get('/ecart/user/view/:id', (req,res) => {
     User.findById( req.params.id, (err, data) => {
         if(!err) {
             res.send(data);
+            console.log(req.params.id);
         }else{
             console.log(err);
         }
@@ -21,8 +22,10 @@ router.put('/ecart/user/edit/:id', (req,res) => {
     const user= {
         name:req.body.name,
         email:req.body.email,
-	    phoneNo:req.body.phoneNo,
-	    address:req.body.address
+	    password:req.body.password,
+        area:req.body.area,
+	    address:req.body.address,
+        productId:req.body.productId
     };
     User.findByIdAndUpdate(req.params.id, { $set:user}, {new:true}, (err, data) => {
         if(!err){
@@ -34,25 +37,5 @@ router.put('/ecart/user/edit/:id', (req,res) => {
     });
  });
 
+module.exports=router;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports=router
