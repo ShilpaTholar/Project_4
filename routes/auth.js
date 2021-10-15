@@ -122,7 +122,7 @@ router.route("/user/login").post((req, res) => {
     const password = req.body.password;
 
     if (!email || !password) {
-        return res.status(422).json({ error: "please add email and paswsword" })
+        return res.status(422).json({ error: "please add email and password" })
     }
     User.findOne({ email: email })
         .then(doc => {
