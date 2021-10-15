@@ -80,7 +80,6 @@ router.route("/shop/login").post((req, res) => {
 
 
 router.post('/user/signup', (req, res) => {
-    console.log('hiii')
     const { name, password, email, address, area } = req.body
     if (!name || !password || !email || !address || !area) {
         return res.status(422).json({ error: "please add all the fields" })
@@ -123,7 +122,7 @@ router.route("/user/login").post((req, res) => {
     const password = req.body.password;
 
     if (!email || !password) {
-        return res.status(422).json({ error: "please add email and paswsword" })
+        return res.status(422).json({ error: "please add email and password" })
     }
     User.findOne({ email: email })
         .then(doc => {
