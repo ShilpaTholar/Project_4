@@ -1,4 +1,3 @@
-const { ObjectID } = require("mongodb");
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
 
@@ -21,7 +20,7 @@ const productSchema = new mongoose.Schema({
     },
     images: {
         type: String,
-        required: true
+        required: false
     },
     shopId: {
         type: ObjectId,

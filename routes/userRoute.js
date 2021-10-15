@@ -8,7 +8,8 @@ router.get('/ecart/user/view/:id', (req, res) => {
     User.findById(req.params.id, (err, data) => {
         if (!err) {
             res.send(data);
-        } else {
+            console.log(req.params.id);
+        }else{
             console.log(err);
         }
 

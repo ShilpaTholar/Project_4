@@ -6,10 +6,11 @@ const Cart = mongoose.model("Cart");
 
 //viewing the cart
 
-router.get('/ecart/mycart/view/:id', (req, res) => {
-    Cart.findById({ userId: req.params.id }, (err, data) => {
+router.get('/ecart/mycart/view/:userId', (req, res) => {
+    Cart.findById( req.params.userId , (err, data) => {
         if (!err) {
             res.send(data);
+
         } else {
             console.log(err);
         }
@@ -20,11 +21,11 @@ router.get('/ecart/mycart/view/:id', (req, res) => {
 //mycart (adding a product)
 
 router.post('/ecart/mycart/add', (req, res) => {
-    const Cart = new Cart({
+    const cart = new Cart({
         userId: req.body.userId,
         productId: req.body.productId
     });
-    Cart.save((err, data) => {
+    cart.save((err, data) => {
         res.status(200).json({
             code: 200, message: "Added",
             addCart: data

@@ -11,7 +11,7 @@ router.post('/ecart/wishlist/add', (req, res) => {
         userId: req.body.userId,
         productId: req.body.productId
     });
-    Wishlist.save((err, data) => {
+    wishlist.save((err, data) => {
         res.status(200).json({
             code: 200, message: "Added",
             addWishlist: data
@@ -35,7 +35,7 @@ router.delete('/ecart/wishlist/delete/:id', (req, res) => {
 //viewing the wishlist
 
 router.get('/ecart/wishlist/view/:id', (req, res) => {
-    Wishlist.findById({ userId: req.params.id }, (err, data) => {
+    Wishlist.findById(req.params.id , (err, data) => {
         if (!err) {
             res.send(data);
         } else {
