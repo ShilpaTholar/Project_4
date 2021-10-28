@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require("mongoose");
-const Shop = mongoose.model("Shop");
-const requireshoplogin = require('../middleware/requireshoplogin.js');
+const User = mongoose.model("User");
+const requirelogin = require('../middleware/requirelogin.js');
 
 
-router.get('/shop/:shopId', requireshoplogin, (req, res) => {
-    Shop.findOne({ _id: req.shop._id })
+router.get('/shop/:shopId', requirelogin, (req, res) => {
+    User.findOne({ _id: req.user._id })
         .then(result => {
             res.json(result)
         })

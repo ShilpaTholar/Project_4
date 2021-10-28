@@ -22,7 +22,17 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    productId: [{ type: ObjectId, ref: "Product" }]
+    hasShop: {
+        type: Boolean,
+        required: true
+    },
+    shopName: {
+        type: String
+    },
+    noOfProducts: {
+        type: String
+    },
+    shopProductId: [{ type: ObjectId, ref: "Product" }]
 })
 
 mongoose.model("User", userSchema);
