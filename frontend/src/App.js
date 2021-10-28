@@ -34,7 +34,7 @@ const Routing = () => {
         <Route exact path="/userSignup" component={UserSignup}></Route>
         <Route exact path="/shopUpdate" component={ShopUpdate}></Route>
         <Route exact path="/shopCreate" component={ShopCreate}></Route>
-        <Route exact path="/shopEdit:id" component={ShopEdit}></Route>
+        <Route exact path="/shopEdit/:id" component={ShopEdit}></Route>
       </Switch>
     </Router>
   )
