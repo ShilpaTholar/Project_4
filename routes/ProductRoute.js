@@ -3,6 +3,7 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const requirelogin = require('../middleware/requirelogin.js');
 const Product = mongoose.model("Product");
+const User = mongoose.model("User");
 
 router.post('/shop/add/:shopid', requirelogin, (req, res) => {
     const product = new Product({
@@ -14,16 +15,25 @@ router.post('/shop/add/:shopid', requirelogin, (req, res) => {
         shopId: req.params.shopid
     });
     product.save((err, data) => {
-        res.status(200).json({
-            code: 200, message: "Added",
-            addProduct: data
-        })
+        if (data) {
+            User.findByIdAndUpdate(req.user._id, {
+                $push: { shopProductId: data._id }
+            }, {
+                new: true
+            }).exec((err, result) => {
+                if (err) {
+                    return res.status(422).json({ error: err })
+                } else {
+                    res.json(result)
+                }
+            })
+        }
     });
 });
 
 
 
-router.get('/shop/display/keyword', requirelogin, (req, res) => {
+router.get('/shop/display/:keyword', requirelogin, (req, res) => {
     Product.findByName(req.params.keyword, (err, data) => {
         if (!err) {
             res.send(data);
@@ -59,12 +69,18 @@ router.put('/shop/update/:ProductId', requirelogin, (req, res) => {
 router.delete('/shop/delete/:ProductId', requirelogin, (req, res) => {
     console.log(req.params.ProductId)
     Product.findByIdAndDelete(req.params.ProductId, (err, data) => {
-        if (!err) {
-            console.log(data)
-            res.status(200).json({
-                code: 200, message: 'deleted',
-                deleteProduct: data
-            });
+        if (data) {
+            User.findByIdAndUpdate(req.user._id, {
+                $pull: { shopProductId: data._id }
+            }, {
+                new: true
+            }).exec((err, result) => {
+                if (err) {
+                    return res.status(422).json({ error: err })
+                } else {
+                    res.json(result)
+                }
+            })
         }
     });
 });
