@@ -24,7 +24,7 @@ const productSchema = new mongoose.Schema({
     },
     shopId: {
         type: ObjectId,
-        ref: "Shop"
+        ref: "User"
     }
 
 })
