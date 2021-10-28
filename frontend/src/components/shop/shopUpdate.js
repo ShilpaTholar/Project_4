@@ -61,6 +61,7 @@ function ShopUpdate() {
         fetch(`http://localhost:5000/shop/delete/${deleteId}`, {
             method: "delete",
             headers: {
+                "Authorization": "Bearer " + localStorage.getItem("jwt"),
                 "Content-Type": "application/json"
             }
         }).then(res => res.json())
