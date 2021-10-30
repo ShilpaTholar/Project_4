@@ -32,7 +32,7 @@ function UserSignup() {
             .then(result => {
                 console.log(result);
                 if (result.message) {
-                    history.push('/');
+                    history.push('/userHome');
                 }
             })
     }

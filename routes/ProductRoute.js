@@ -18,8 +18,8 @@ router.post('/shop/add', (req,res) => {
     });
  });
 
- router.get('/shop/display/keyword', (req,res) => {
-    Product.findByName( req.params.keyword , (err, data) => {
+ router.get('/shop/display/:keyword', (req,res) => {
+    Product.find( {name:req.params.keyword }, (err, data) => {
         if (!err) {
             res.send(data);
 
@@ -29,6 +29,29 @@ router.post('/shop/add', (req,res) => {
 
     });
  })
+ router.get('/product/view/:id', (req, res) => {
+    Product.findById( req.params.id , (err, data) => {
+        if (!err) {
+            res.send(data);
+
+        } else {
+            console.log(err);
+        }
+
+    });
+});
+
+ router.get('/shop/display', (req,res) => {
+    Product.find({},(err, data) => {
+        if (!err) {
+            res.send(data);
+        } else {
+            console.log(err);
+        }
+
+    });
+ })
+
 
  router.put('/shop/update/:ProductId', (req,res) => {
     const product={
