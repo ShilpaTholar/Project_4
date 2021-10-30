@@ -13,7 +13,10 @@ function ShopEdit() {
     const [cost, setcost] = useState(0);
     const [quantity, setquantity] = useState(0);
     const [name, setname] = useState("");
-    const [url, seturl] = useState("")
+    const [url, seturl] = useState("");
+    const [productType, setproductType] = useState("");
+    const filters = ['Ration', 'Desserts', 'Cloths', 'Cosmetics']
+
 
     var { id } = useParams();
 
@@ -47,6 +50,7 @@ function ShopEdit() {
                     description: description ? description : product[0].description,
                     quantity: quantity ? quantity : product[0].quantity,
                     name: name ? name : product[0].name,
+                    productType: productType ? productType : product[0].name,
                     images: url ? url : product[0].images
                 })
             }).then(res => res.json())
@@ -91,6 +95,7 @@ function ShopEdit() {
                     description: description ? description : product[0].description,
                     quantity: quantity ? quantity : product[0].quantity,
                     name: name ? name : product[0].name,
+                    productType: productType ? productType : product[0].name,
                     images: product[0].images
                 })
             }).then(res => res.json())
@@ -103,6 +108,10 @@ function ShopEdit() {
                 })
         }
 
+    }
+
+    function handleDropdownChange(e) {
+        setproductType(e.target.value);
     }
 
 
@@ -145,6 +154,23 @@ function ShopEdit() {
                                         :
                                         <p>Loading Image...</p>
                                 }
+                            </div>
+                            <div className="col">
+                                <label>Product Type</label>
+                                <select onChange={handleDropdownChange} className="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>{product[0] ? product[0].productType : ''}</option>
+                                    {
+                                        product[0] ?
+                                            filters.map(item => {
+                                                if (item != product[0].productType) {
+                                                    return (
+                                                        <option value={item}>{item}</option>
+                                                    )
+                                                }
+                                            }) :
+                                            <></>
+                                    }
+                                </select>
                             </div>
                         </div>
                         <div className="row">
