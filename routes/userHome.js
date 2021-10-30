@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require("mongoose");
 const Product = mongoose.model("Product");
-const Shop = mongoose.model("Shop");
+const User = mongoose.model("User");
 const requirelogin = require('../middleware/requirelogin.js');
 
 //get all products from shop which belong to area of user

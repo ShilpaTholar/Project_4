@@ -8,13 +8,16 @@ function UserSignup() {
 
     const history = useHistory();
     const [address, setaddress] = useState('');
+    const [shopName, setshopname] = useState('');
     const [area, setarea] = useState('');
     const [password, setpassword] = useState('');
+    const [hasShop, sethasShop] = useState(false)
     const [confirmpassword, setconfirmpassword] = useState('');
     const [name, setname] = useState('');
     const [email, setemail] = useState('');
 
     const signupuser = (event) => {
+        console.log("hasShop", hasShop)
         event.preventDefault();
         fetch('http://localhost:5000/user/signup', {
             method: "post",
@@ -26,7 +29,9 @@ function UserSignup() {
                 area,
                 password,
                 name,
-                email
+                email,
+                hasShop,
+                shopName
             })
         }).then(res => res.json())
             .then(result => {
@@ -38,7 +43,7 @@ function UserSignup() {
     }
 
     return (
-        <div className="container signupcontainer h-100 my-5">
+        <div className="container signupcontainer h-220 my-5">
             <div className="row d-flex justify-content-center align-items-center h-100">
                 <div className="col ps-0 pe-0">
                     <div className="card card-registration ">
@@ -59,13 +64,13 @@ function UserSignup() {
                                         <div className="col-md-6">
                                             <div className="form-floating mb-3">
                                                 <input type="text" id="floatingInput" value={name} onChange={(e) => { setname(e.target.value) }} className="form-control" placeholder="name" />
-                                                <label for="floatingInput">Name</label>
+                                                <label htmlFor="floatingInput">Name</label>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-floating mb-3">
                                                 <input type="email" className="form-control" id="floatingInput" onChange={(e) => { setemail(e.target.value) }} value={email} placeholder="name@example.com" />
-                                                <label for="floatingInput">Email address</label>
+                                                <label htmlFor="floatingInput">Email address</label>
                                             </div>
                                         </div>
                                     </div>
@@ -73,37 +78,55 @@ function UserSignup() {
                                         <div className="col-md-6">
                                             <div className="form-floating mb-3">
                                                 <input type="text" id="floatingInput" className="form-control" value={password} onChange={(e) => { setpassword(e.target.value) }} placeholder="password" />
-                                                <label for="floatingInput">Password</label>
+                                                <label htmlFor="floatingInput">Password</label>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-floating mb-3">
                                                 <input type="email" className="form-control" id="floatingInput" value={confirmpassword} onChange={(e) => { setconfirmpassword(e.target.value) }} placeholder="comfirm password" />
-                                                <label for="floatingInput">Confirm Password</label>
+                                                <label htmlFor="floatingInput">Confirm Password</label>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className="form-floating mb-3">
                                         <input type="text" id="floatingInput" className="form-control" value={address} onChange={(e) => { setaddress(e.target.value) }} placeholder="Address" />
-                                        <label for="floatingInput">Address</label>
+                                        <label htmlFor="floatingInput">Address</label>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <div className="form-floating mb-3">
+                                                <input type="text" id="floatingInput" className="form-control" value={area} onChange={(e) => { setarea(e.target.value) }} placeholder="Area" />
+                                                <label htmlFor="floatingInput">Area</label>
+                                            </div>
+                                        </div>
+                                        <div className="col-md-6">
+                                            <div className="form-floating mb-3">
+                                                <input type="number" id="floatingInput" className="form-control" placeholder="Pincode" />
+                                                <label htmlFor="floatingInput">Pincode</label>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div className="row">
                                         <div className="col-md-6">
                                             <div className="form-floating">
-                                                <input type="text" id="floatingInput" className="form-control" value={area} onChange={(e) => { setarea(e.target.value) }} placeholder="Area" />
-                                                <label for="floatingInput">Area</label>
+                                                <div className="form-check">
+                                                    <input className="form-check-input" onChange={(e) => sethasShop(e.target.checked)} type="checkbox" value="" id="flexCheckDefault" />
+                                                    <label className="form-check-label" htmlFor="flexCheckDefault">
+                                                        Do you Have a Shop?
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-floating">
-                                                <input type="number" id="floatingInput" className="form-control" placeholder="Pincode" />
-                                                <label for="floatingInput">Pincode</label>
+                                                <input type="text" className="form-control" id="floatingInput" value={shopName} onChange={(e) => { setshopname(e.target.value) }} placeholder="Shop name" />
+                                                <label htmlFor="floatingInput">Shop name</label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="row mx-auto ms-5 me-5 ">
+                                <div className="row mx-auto ms-5 me-5 mb-5">
                                     <button onClick={signupuser} className=" col-md-4 btn btn-info btn-outline">Sign up</button>
                                     <p className="col-md-4 lead">OR</p>
                                     <Link to="/userLogin" className="btn btn-outline-info col-md-4">Login</Link>

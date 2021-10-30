@@ -18,7 +18,6 @@ require('./models/order')
 require('./models/product')
 require('./models/review')
 require('./models/wishlist')
-require('./models/shop')
 require('./models/cart')
 
 app.use(express.json());
@@ -26,7 +25,6 @@ app.use(express.json());
 app.use(require('./routes/auth'))
 app.use(require('./routes/cartRoute'))
 app.use(require('./routes/ProductRoute'))
-app.use(require('./routes/shopCreate'))
 app.use(require('./routes/shopHome'))
 app.use(require('./routes/userHome'))
 app.use(require('./routes/wishlistRoute'))
