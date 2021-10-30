@@ -1,9 +1,12 @@
 import './App.css';
 import React, { useEffect, createContext, useReducer, useContext } from 'react'
 import { Switch, Route, BrowserRouter as Router, useHistory } from "react-router-dom";
-import { reducer, initialState } from './reducers/userReducer'
+import { reducer, initialState } from './reducers/userReducer';
 import UserLogin from './components/user/userLogin';
 import UserHome from './components/user/userHome';
+import Wishlist from './components/user/Wishlist';
+import Landingpage from './components/user/Landingpage';
+import DisplayIndividualProduct from './components/user/DisplayIndividualProduct';
 import ShopUpdate from './components/shop/shopUpdate';
 import UserSignup from './components/user/userSignup';
 import ShopCreate from './components/shop/shopCreate';
@@ -30,8 +33,11 @@ const Routing = () => {
     <Router>
       <Switch>
         <Route exact path="/userLogin" component={UserLogin}></Route>
-        <Route exact path="/userHome" component={UserHome}></Route>
         <Route exact path="/userSignup" component={UserSignup}></Route>
+        <Route exact path="/userHome" component={UserHome}></Route>
+       <Route exact path="/DisplayProduct/:id" component={DisplayIndividualProduct}></Route>
+       <Route exact path="/wishlist" component={Wishlist}></Route>
+       <Route exact path="/Landingpage" component={Landingpage}></Route>
         <Route exact path="/shopUpdate" component={ShopUpdate}></Route>
         <Route exact path="/shopCreate" component={ShopCreate}></Route>
         <Route exact path="/shopEdit/:id" component={ShopEdit}></Route>

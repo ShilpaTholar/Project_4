@@ -33,8 +33,8 @@ router.post('/shop/add/:shopid', requirelogin, (req, res) => {
 
 
 
-router.get('/shop/display/:keyword', requirelogin, (req, res) => {
-    Product.findByName(req.params.keyword, (err, data) => {
+ router.get('/shop/display/:keyword', (req,res) => {
+    Product.find( {name:req.params.keyword }, (err, data) => {
         if (!err) {
             res.send(data);
 
@@ -43,7 +43,31 @@ router.get('/shop/display/:keyword', requirelogin, (req, res) => {
         }
 
     });
-})
+ })
+ router.get('/product/view/:id', (req, res) => {
+    Product.findById( req.params.id , (err, data) => {
+        if (!err) {
+            res.send(data);
+
+        } else {
+            console.log(err);
+        }
+
+    });
+});
+
+ router.get('/shop/display', (req,res) => {
+    Product.find({},(err, data) => {
+        if (!err) {
+            res.send(data);
+        } else {
+            console.log(err);
+        }
+
+    });
+ })
+
+
 
 router.put('/shop/update/:ProductId', requirelogin, (req, res) => {
     const product = {
