@@ -12,6 +12,7 @@ router.post('/shop/add/:shopid', requirelogin, (req, res) => {
         quantity: req.body.quantity,
         name: req.body.name,
         images: req.body.images,
+        productType: req.body.productType,
         shopId: req.params.shopid
     });
     product.save((err, data) => {
@@ -33,8 +34,8 @@ router.post('/shop/add/:shopid', requirelogin, (req, res) => {
 
 
 
- router.get('/shop/display/:keyword', (req,res) => {
-    Product.find( {name:req.params.keyword }, (err, data) => {
+router.get('/shop/display/:keyword', (req, res) => {
+    Product.find({ name: req.params.keyword }, (err, data) => {
         if (!err) {
             res.send(data);
 
@@ -43,9 +44,9 @@ router.post('/shop/add/:shopid', requirelogin, (req, res) => {
         }
 
     });
- })
- router.get('/product/view/:id', (req, res) => {
-    Product.findById( req.params.id , (err, data) => {
+})
+router.get('/product/view/:id', (req, res) => {
+    Product.findById(req.params.id, (err, data) => {
         if (!err) {
             res.send(data);
 
@@ -56,8 +57,8 @@ router.post('/shop/add/:shopid', requirelogin, (req, res) => {
     });
 });
 
- router.get('/shop/display', (req,res) => {
-    Product.find({},(err, data) => {
+router.get('/shop/display', (req, res) => {
+    Product.find({}, (err, data) => {
         if (!err) {
             res.send(data);
         } else {
@@ -65,7 +66,7 @@ router.post('/shop/add/:shopid', requirelogin, (req, res) => {
         }
 
     });
- })
+})
 
 
 
@@ -76,6 +77,7 @@ router.put('/shop/update/:ProductId', requirelogin, (req, res) => {
         quantity: req.body.quantity,
         name: req.body.name,
         images: req.body.images,
+        productType: req.body.productType,
         shopId: req.body.shopId
     };
     Product.findByIdAndUpdate(req.params.ProductId, { $set: product }, { new: true }, (err, data) => {

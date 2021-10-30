@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
-
+//type = ration,desserts,cloths,cosmetics
 const productSchema = new mongoose.Schema({
     cost: {
         type: String,
@@ -11,6 +11,10 @@ const productSchema = new mongoose.Schema({
         required: true
     },
     quantity: {
+        type: String,
+        required: true
+    },
+    productType: {
         type: String,
         required: true
     },
