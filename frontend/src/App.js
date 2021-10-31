@@ -11,6 +11,7 @@ import ShopUpdate from './components/shop/shopUpdate';
 import UserSignup from './components/user/userSignup';
 import ShopCreate from './components/shop/shopCreate';
 import ShopEdit from './components/shop/shopEdit';
+import Cart from './components/user/Cart';
 export const UserContext = createContext();
 
 const Routing = () => {
@@ -35,12 +36,13 @@ const Routing = () => {
         <Route exact path="/userLogin" component={UserLogin}></Route>
         <Route exact path="/userSignup" component={UserSignup}></Route>
         <Route exact path="/userHome" component={UserHome}></Route>
-       <Route exact path="/DisplayProduct/:id" component={DisplayIndividualProduct}></Route>
-       <Route exact path="/wishlist" component={Wishlist}></Route>
-       <Route exact path="/Landingpage" component={Landingpage}></Route>
+        <Route exact path="/DisplayProduct/:id" component={DisplayIndividualProduct}></Route>
+        <Route exact path="/wishlist" component={Wishlist}></Route>
+        <Route exact path="/Landingpage" component={Landingpage}></Route>
         <Route exact path="/shopUpdate" component={ShopUpdate}></Route>
         <Route exact path="/shopCreate" component={ShopCreate}></Route>
         <Route exact path="/shopEdit/:id" component={ShopEdit}></Route>
+        <Route exact path="/Cart" component={Cart}></Route>
       </Switch>
     </Router>
   )
