@@ -1,6 +1,6 @@
 import  React, { Component } from 'react';
 
-class Usercard extends Component{
+class Userprofile extends Component{
     render(){
         return(
             <div class="container rounded bg-white mt-5 mb-5">
@@ -14,7 +14,7 @@ class Usercard extends Component{
                     <h4 class="text-right">Profile Settings</h4>
                 </div>
                 <div class="row mt-2">
-                    <div class="col-md-12"><label class="labels">Name</label><input type="text" class="form-control" placeholder="name"/></div>
+                    <div class="col-md-12"><label class="labels">Name</label><input type="text" class="form-control" value='{localStorage.getItem("user.email")}' placeholder="name"/></div>
                 </div>
                 <div class="row mt-3">
                     <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number"/></div>
@@ -37,4 +37,4 @@ class Usercard extends Component{
 
 
 
-export default Usercard;
+export default Userprofile;

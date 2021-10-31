@@ -29,6 +29,7 @@ app.use(require('./routes/shopHome'))
 app.use(require('./routes/userHome'))
 app.use(require('./routes/wishlistRoute'))
 app.use(require('./routes/userRoute'))
+app.use(require('./routes/OrderRoute'))
 
 
 app.listen(5000, function (req, res) {
