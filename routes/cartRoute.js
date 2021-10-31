@@ -3,39 +3,42 @@ const router = express.Router();
 const mongoose = require("mongoose");
 //const requirelogin = require('../middleware/requirelogin.js');
 const Cart = mongoose.model("Cart");
+const requirelogin = require('../middleware/requirelogin');
 
 //viewing the cart
 
-router.get('/ecart/mycart/view/:userId', (req, res) => {
-    Cart.findById( req.params.userId , (err, data) => {
-        if (!err) {
-            res.send(data);
-
+router.get('/ecart/cart/view', requirelogin, (req, res) => {
+    Cart.find({ userId: req.user._id }).populate("productId").exec((err, result) => {
+        if (err) {
+            return res.status(422).json({ error: err })
         } else {
-            console.log(err);
+            res.json(result)
         }
-
-    });
+    })
 });
 
 //mycart (adding a product)
 
-router.post('/ecart/mycart/add', (req, res) => {
+router.post('/ecart/cart/add', requirelogin, (req, res) => {
     const cart = new Cart({
-        userId: req.body.userId,
+        userId: req.user._id,
         productId: req.body.productId
     });
     cart.save((err, data) => {
-        res.status(200).json({
-            code: 200, message: "Added",
-            addCart: data
-        })
+        if (data) {
+            res.status(200).json({
+                code: 200, message: "Added",
+                addCart: data
+            })
+        } else {
+            return res.status(422).json({ error: err })
+        }
     });
 });
 
 // mycart (deleting a product)
 
-router.delete('/ecart/mycart/delete/:id', (req, res) => {
+router.delete('/ecart/cart/delete/:id', requirelogin, (req, res) => {
     Cart.findByIdAndRemove(req.params.id, (err, data) => {
         if (!err) {
             res.status(200).json({

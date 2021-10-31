@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../App'
-import '../global.css'
+//import '../global.css'
 import UserLogin from '../user/userLogin'
 
 function ShopCreate() {

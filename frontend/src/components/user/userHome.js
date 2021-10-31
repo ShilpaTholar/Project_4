@@ -1,10 +1,12 @@
-import  React, { useState,useEffect } from 'react';
+import  React, { useState,useEffect,useContext } from 'react';
 import axios from "axios";
 import {Container ,Row, Col} from "react-bootstrap";
 import './shop.css';
 import {useHistory ,Link} from "react-router-dom";
+import { UserContext } from '../../App';
 
 function UserHome() {
+    const { state, dispatch } = useContext(UserContext)
     const [product, setProduct]=useState('');
     const [post, setPost] =useState([]);
     const [loading, setLoading] = useState(false);
@@ -13,12 +15,6 @@ function UserHome() {
     let checkState = (e) =>{
       setProduct(e.target.value)
       console.log(product)
-    }
-
-    function filter(val){
-      if (val==1){
-        console.log("clicked");
-      }
     }
 
     useEffect(() => {
@@ -37,6 +33,31 @@ function UserHome() {
             })
 
     }, [])
+
+    const cart = (event)=> {
+      event.preventDefault();
+     // console.log("inside")
+     // console.log(post._id)
+      fetch("http://localhost:5000/ecart/cart/add", {
+        method: "post",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("jwt")
+        },
+        body: JSON.stringify({
+          productId: post._id,
+        })
+    }).then(res => res.json())
+        .then(result => {
+           // setPost(result)
+            console.log("added to cart");
+           // console.log(result)
+        } 
+        )
+        .catch(err => {
+            console.log("error ==", err)
+        })
+    }
 
     
     const handleClick = (e) => {
@@ -63,26 +84,17 @@ function UserHome() {
         return(
           <><nav className="navbar navbar-expand-lg navbar-light bg-light">
           <div className="container-fluid">
-            <a className="navbar-brand" href="#">Hello Username</a>
+            <a className="navbar-brand" href="#">Hello {state.name}</a>
             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">MyCart</a>
+                  <a className="nav-link active" aria-current="page" onClick={() => history.push('/Cart')}>MyCart</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="#">Wishlist</a>
-                </li>
-                <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    FilterByPrice
-                  </a>
-                  <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a className="dropdown-item" href="#" value="1">HightoLow</a></li>
-                    <li><a className="dropdown-item" href="#" value="2">LowToHigh</a></li>
-                  </ul>
+                  <a className="nav-link active" onClick={() => history.push('/wishlist')}>Wishlist</a>
                 </li>
               </ul>
               <form className="d-flex">
@@ -101,17 +113,15 @@ function UserHome() {
                       <br/>
                       <Link to={"/DisplayProduct/"+ ele._id}>
                       <div class="card" style={{width: "18rem"}}>
-                         <img class="card-img-top" src={ele.images} alt="Card image cap"/>
+                         <img class="card-img-top" style={{height:"250px"}} src={ele.images} alt="Card image cap"/>
                          <div class="card-img-overlay d-flex justify-content-end">
                           <a href="#" class="card-link text-danger like">
-                            <i class="fas fa-heart"></i>
                           </a>
                         </div>
                          <div class="card-body">
                           <h5 class="card-title">{ele.name}</h5>
+                          <h5 class="card-title">Rs. {ele.cost}</h5>
                           <div class="buy d-flex justify-content-between align-items-center">
-                          <div class="price text-info"><h5 class="mt-4">Rs. {ele.cost}</h5></div>
-                          <a href="#solo" class="btn btn-info mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a>
                          </div>
                          </div>
                       </div>
