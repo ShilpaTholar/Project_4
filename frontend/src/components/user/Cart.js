@@ -4,27 +4,25 @@ import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
 import './shop.css';
 import reactRouterDom, { useHistory, Link } from "react-router-dom";
-import { useParams } from 'react-router-dom';
 import { UserContext } from '../../App';
 import styled from "styled-components";
-import history from './history';
 
 function Cart() {
-  const Summary = styled.div`
+    const Summary = styled.div`
   flex: 1;
   border: 0.5px solid lightgray;
   border-radius: 10px;
   padding: 20px;
 `;
 
-  const SummaryTitle = styled.h1`
+    const SummaryTitle = styled.h1`
   font-family:cursive;
   text-align: center;
   font-weight: 200;
   color:rgb(66, 206, 248);
 `;
 
-  const SummaryItem = styled.div`
+    const SummaryItem = styled.div`
   font-family:cursive;
   margin: 30px 0px;
   display: flex;
@@ -33,11 +31,11 @@ function Cart() {
   font-size: ${(props) => props.type === "total" && "24px"};
 `;
 
-  const SummaryItemText = styled.span``;
+    const SummaryItemText = styled.span``;
 
-  const SummaryItemPrice = styled.span``;
+    const SummaryItemPrice = styled.span``;
 
-  const Button = styled.button`
+    const Button = styled.button`
   width: 100%;
   padding: 10px;
   background-color:rgb(66, 206, 248) ;
@@ -85,7 +83,7 @@ function Cart() {
             .then(result => {
                 setPost(result)
                 console.log(result)
-            } 
+            }
             )
             .catch(err => {
                 console.log("error ==", err)
@@ -102,8 +100,6 @@ function Cart() {
                         post && post.length > 0 ? post.map((ele, i) => {
                             c = c + parseInt(ele.productId.cost);
                             localStorage.setItem("cost", c);
-                            //setproduct((prod)=>[...prod,ele.productId._id])
-
                             return (
                                 <Row sm={1} key={'product-' + i}>
                                     <br />

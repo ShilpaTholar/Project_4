@@ -50,6 +50,3 @@ router.delete('/ecart/cart/delete/:id', requirelogin, (req, res) => {
 });
 
 module.exports = router
-
-
-

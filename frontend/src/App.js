@@ -11,11 +11,11 @@ import ShopUpdate from './components/shop/shopUpdate';
 import UserSignup from './components/user/userSignup';
 import ShopCreate from './components/shop/shopCreate';
 import ShopEdit from './components/shop/shopEdit';
+import Cart from './components/user/Cart';
 import Afterwishlist from './components/user/Afterwishlist';
 import Aftercart from './components/user/Aftercart';
 import Cart from './components/user/Cart';
 import Checkout from './components/user/Checkout';
-import history from './components/user/history';
 
 export const UserContext = createContext();
 
@@ -41,11 +41,14 @@ const Routing = () => {
         <Route exact path="/userLogin" component={UserLogin}></Route>
         <Route exact path="/userSignup" component={UserSignup}></Route>
         <Route exact path="/userHome" component={UserHome}></Route>
+        <Route exact path="/DisplayProduct/:id" component={DisplayIndividualProduct}></Route>
+        <Route exact path="/wishlist" component={Wishlist}></Route>
+        <Route exact path="/Landingpage" component={Landingpage}></Route>
         <Route exact path="/userProfile" component={Userprofile}></Route>
-       <Route exact path="/DisplayProduct/:id" component={DisplayIndividualProduct}></Route>
-       <Route exact path="/wishlist" component={Wishlist}></Route>
-       <Route exact path="/Afterwishlist/:id/:id1" component={Afterwishlist}></Route>
-       <Route exact path="/Aftercart/:id/:id1" component={Aftercart}></Route>
+        <Route exact path="/DisplayProduct/:id" component={DisplayIndividualProduct}></Route>
+        <Route exact path="/wishlist" component={Wishlist}></Route>
+        <Route exact path="/Afterwishlist/:id/:id1" component={Afterwishlist}></Route>
+        <Route exact path="/Aftercart/:id/:id1" component={Aftercart}></Route>
         <Route exact path="/shopUpdate" component={ShopUpdate}></Route>
         <Route exact path="/shopCreate" component={ShopCreate}></Route>
         <Route exact path="/shopEdit/:id" component={ShopEdit}></Route>
