@@ -82,8 +82,8 @@ router.route("/user/login").post((req, res) => {
                     if (doMatch) {
                         console.log("doc:", doc)
                         const token = jwt.sign({ _id: doc._id }, JWT_SECRET)
-                        const { _id, email, shopName, hasShop, address, area, productId } = doc;
-                        res.json({ token, user: { _id, email, shopName, hasShop, address, area, productId } })
+                        const { _id, email, shopName, hasShop, address, area, productId,name } = doc;
+                        res.json({ token, user: { _id, email, shopName, hasShop, address, area, productId, name } })
                     }
                     else {
                         return res.status(422).json({ error: "Invalid email or password" });

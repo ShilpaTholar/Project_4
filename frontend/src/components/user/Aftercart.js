@@ -4,60 +4,35 @@ import axios from "axios";
 import './shop.css';
 import { useParams } from 'react-router-dom';
 
-const DisplayIndividualProduct = () => {
+
+const Aftercart = () => {
     const [post, setPost]=useState('');
-    const { id } = useParams();
+    const { id ,id1} = useParams();
     useEffect(() => {
-        console.log(id)
+       // console.log(id)
         const baseUrl= `http://localhost:5000/product/view/${id}`;
         axios.get(baseUrl).then((response) => {
         setPost(response.data);    
-        console.log(post);
+       // console.log(post);
     }, [])
   
 });
-  const wishlist = (event)=> {
+  const removeCart = (event)=> {
     event.preventDefault();
-    console.log("inside wishlist")
-   // console.log(post._id)
-    fetch("http://localhost:5000/ecart/wishlist/add", {
-      method: "post",
+   // const deleteId=post._id;
+    console.log(id1)
+    //console.log("inside wishlist")
+    //console.log(post._id)
+    fetch(`http://localhost:5000/ecart/cart/delete/${id1}`, {
+      method: "delete",
       headers: {
           "Content-Type": "application/json",
           "Authorization": "Bearer " + localStorage.getItem("jwt")
       },
-      body: JSON.stringify({
-        productId: post._id,
-      })
   }).then(res => res.json())
       .then(result => {
          // setPost(result)
-          console.log("added to wishlist");
-         // console.log(result)
-      } 
-      )
-      .catch(err => {
-          console.log("error ==", err)
-      })
-  }
-  const cart = (event)=> {
-    event.preventDefault();
-   // console.log("inside")
-   // console.log(post._id)
-    fetch("http://localhost:5000/ecart/cart/add", {
-      method: "post",
-      headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("jwt")
-      },
-      body: JSON.stringify({
-        productId: post._id,
-      })
-  }).then(res => res.json())
-      .then(result => {
-         // setPost(result)
-          console.log("added to cart");
-         // console.log(result)
+          console.log("deleted from cart");
       } 
       )
       .catch(err => {
@@ -106,8 +81,7 @@ const DisplayIndividualProduct = () => {
                         </div>
                       </div>
                       <div class="center-block">
-                         <button class="btn btn-light btn-lg" onClick={(event) => {cart(event)}}><i class="fas fa-shopping-cart"></i>Add To Cart</button>
-                         <button class="btn btn-light btn-lg" onClick={(event) => {wishlist(event)}}><i class="fas fa-heart"></i>Add To Wishlist</button>                        
+                         <button class="btn btn-light btn-lg" onClick={(event) => {removeCart(event)}}><i class="fas fa-heart"></i>Remove from Cart</button>                        
                       </div>
 
                       </div>
@@ -122,4 +96,4 @@ const DisplayIndividualProduct = () => {
     );
 }
 
-export default DisplayIndividualProduct;
+export default Aftercart;

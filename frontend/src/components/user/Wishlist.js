@@ -11,20 +11,12 @@ function Wishlist(){
     const [post, setPost]=useState('');
     const { state, dispatch } = useContext(UserContext);
      useEffect(() => {
-    //     const baseUrl1= `http://localhost:5000/ecart/wishlist/add/${state.id}`;
-    //     axios.get(baseUrl1).then((response) => {
-    //     setPost(response.data);    
-    //     console.log(response.data);
-    fetch("http://localhost:5000/wishlist/add", {
-        method: "post",
+    fetch("http://localhost:5000/ecart/wishlist/view", {
+        method: "get",
         headers: {
             "Content-Type": "application/json",
             "Authorization": "Bearer " + localStorage.getItem("jwt")
         },
-        body: JSON.stringify({
-          userId: '617938ace84fdfd68e3af6bb',
-          productId: '61744e095d075bef8901c12d',
-        })
     }).then(res => res.json())
         .then(result => {
             setPost(result)
@@ -39,7 +31,39 @@ function Wishlist(){
   
 
     return(
-        <h1>hii</h1>
+        <Container>
+                <h3 className="wishlist">YOUR WISHLIST</h3>
+                <Row>
+                  { 
+                     post && post.length > 0 ? post.map((ele, i) => 
+                      <Col sm={3} key = {'product-'+i}>
+                      <br/>
+                      <Link to={"/Afterwishlist/"+ ele.productId._id +"/" +ele._id}>
+                      <div class="card" style={{width: "18rem"}}>
+                         <img class="card-img-top" style={{height:"250px"}} src={ele.productId.images} alt="Card image cap"/>
+                         <div class="card-img-overlay d-flex justify-content-end">
+                          <a href="#" class="card-link text-danger like">
+                          </a>
+                        </div>
+                         <div class="card-body">
+                          <h5 class="card-title">{ele.productId.name}</h5>
+                          <div class="buy d-flex justify-content-between align-items-center">
+                          <div class="price text-info text-center" style={{textalign:"center"}}><h5 class="mt-4">Rs. {ele.productId.cost}</h5></div>
+                          {/* <a href="#solo" class="btn btn-info mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a> */}
+                         </div>
+                         </div>
+                      </div>
+                      </Link>
+                      </Col>   
+                    ):<div class="row">
+                    <div class="span12">
+                    <div class="alert alert-info">No products found</div>
+                    </div>
+                    </div>                                     
+                  }    
+              </Row>
+                   
+            </Container>
     )
   
 }
