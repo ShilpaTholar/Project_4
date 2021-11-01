@@ -14,6 +14,8 @@ function ShopCreate() {
     const [quantity, setquantity] = useState(0);
     const [name, setname] = useState("");
     const [url, seturl] = useState("")
+    const [productType, setproductType] = useState("");
+    const filters = ['Ration', 'Desserts', 'Cloths', 'Cosmetics']
 
 
 
@@ -29,6 +31,7 @@ function ShopCreate() {
                     cost,
                     description,
                     quantity,
+                    productType,
                     name,
                     images: url
                 })
@@ -64,6 +67,10 @@ function ShopCreate() {
             })
     }
 
+    function handleDropdownChange(e) {
+        setproductType(e.target.value);
+    }
+
 
     if (!state) {
         return <UserLogin />
@@ -94,9 +101,25 @@ function ShopCreate() {
                                 <input type="text" className="form-control" onChange={(e) => setcost(e.target.value)} placeholder="const" />
                             </div>
                         </div>
-                        <div className="row choosefile mb-3">
-                            <label className="form-label">Select images</label>
-                            <input onChange={(e) => setimage(e.target.files[0])} className="form-control" type="file" id="formFile" />
+                        <div className="row mb-3">
+                            <div className="col">
+                                <label>Product Type</label>
+                                <select onChange={handleDropdownChange} className="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Select Type</option>
+                                    {
+                                        filters.map(item => {
+                                            return (
+                                                <option value={item}>{item}</option>
+                                            )
+                                        })
+                                    }
+                                </select>
+                            </div>
+                            <div className="col choosefile">
+                                <label className="form-label">Select images</label>
+                                <input onChange={(e) => setimage(e.target.files[0])} className="form-control" type="file" id="formFile" />
+                            </div>
+
                         </div>
                         <div className="row mb-3">
                             <div className="col">

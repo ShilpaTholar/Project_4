@@ -11,11 +11,12 @@ import ShopUpdate from './components/shop/shopUpdate';
 import UserSignup from './components/user/userSignup';
 import ShopCreate from './components/shop/shopCreate';
 import ShopEdit from './components/shop/shopEdit';
-import Cart from './components/user/Cart';
 import Afterwishlist from './components/user/Afterwishlist';
 import Aftercart from './components/user/Aftercart';
 import Cart from './components/user/Cart';
 import Checkout from './components/user/Checkout';
+import Landingpage from './components/Landingpage'
+//import UserHome from './components/user/home2';
 
 export const UserContext = createContext();
 

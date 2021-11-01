@@ -69,7 +69,8 @@ function Cart() {
             })
     }, [])
 
-    const order = () => {
+    const order = (e) => {
+        e.preventDefault();
         fetch("http://localhost:5000/ecart/orders", {
             method: "post",
             headers: {
@@ -77,7 +78,7 @@ function Cart() {
                 "Authorization": "Bearer " + localStorage.getItem("jwt")
             },
             body: JSON.stringify({
-                productId: prod,
+                productId: post._id,
             })
         }).then(res => res.json())
             .then(result => {
@@ -155,7 +156,7 @@ function Cart() {
                             <SummaryItemPrice>Rs. {localStorage.getItem("cost")}</SummaryItemPrice>
                         </SummaryItem>
                         <div class="col-md-12 text-center">
-                            <button class="btn btn-light btn-lg" style={{ align: 'center' }}>Checkout Now</button>
+                            <button class="btn btn-light btn-lg" onClick={order} style={{ align: 'center' }}>Checkout Now</button>
                         </div>
                     </Summary>
                 </Col>

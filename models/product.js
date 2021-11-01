@@ -26,6 +26,10 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: false
     },
+    area: {
+        type: String,
+        required: false
+    },
     shopId: {
         type: ObjectId,
         ref: "User"
