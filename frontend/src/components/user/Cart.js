@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect, useContext } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import './shop.css';
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { UserContext } from '../../App';
 import styled from "styled-components";
 import UserLogin from './userLogin';
@@ -49,24 +49,13 @@ function Cart() {
 
     const SummaryItemPrice = styled.span``;
 
-    const Button = styled.button`
-  width: 100%;
-  padding: 10px;
-  background-color:rgb(66, 206, 248) ;
-  color: black;
-  font-weight: 600;
-  font-family:cursive;
-  box-shadow: 0 12px 16px 0 rgba(8, 4, 233, 0.24), 0 17px 50px 0 rgba(100, 188, 214, 0.19);
 
-`;
 
-    const history = useHistory();
-    const [post, setPost] = useState('');
+    const [post, setPost] = useState([]);
     const [modalIsOpen, setIsOpen] = useState(false);
     const { state, dispatch } = useContext(UserContext);
-    var c = 0;
     useEffect(() => {
-        fetch("http://localhost:5000/ecart/cart/view", {
+        fetch("http://localhost:5000/cart/view", {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
@@ -75,12 +64,19 @@ function Cart() {
         }).then(res => res.json())
             .then(result => {
                 setPost(result)
+                if (post.length > 0) {
+                    var c = 0
+                    post.map(ele => {
+                        c = c + parseInt(ele.productId.cost) * ele.count;
+                    })
+                    localStorage.setItem("total", c)
+                }
             }
             )
             .catch(err => {
                 console.log("error ==", err)
             })
-    }, [])
+    }, [post])
 
     function openModal() {
         setIsOpen(true)
@@ -93,22 +89,57 @@ function Cart() {
 
     const order = (e) => {
         e.preventDefault();
-        fetch("http://localhost:5000/ecart/cart/deleteall", {
+
+        fetch("http://localhost:5000/orders/add", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("jwt")
+            },
+            body: JSON.stringify({
+                items: post
+            })
+        }).then(res => res.json())
+            .then(result => {
+                console.log(result)
+                openModal()
+            })
+            .catch(err => {
+                console.log("error ==", err)
+            })
+    }
+
+    const changeItem = (count, shouldreduce, id, event) => {
+        event.preventDefault();
+        fetch("http://localhost:5000/cart/cartupdate", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("jwt")
+            },
+            body: JSON.stringify({
+                count: shouldreduce ? count - 1 : count + 1,
+                cartId: id
+            })
+        }).then(res => res.json())
+            .then(result => {
+            })
+            .catch(err => {
+                console.log("error ==", err)
+            })
+    }
+
+    const removeCart = (id, event) => {
+        event.preventDefault();
+        fetch(`http://localhost:5000/cart/delete/${id}`, {
             method: "delete",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + localStorage.getItem("jwt")
             },
-
         }).then(res => res.json())
             .then(result => {
-                setPost(result)
-                localStorage.setItem("cost", 0);
-                console.log(result)
-                openModal()
-
-            }
-            )
+            })
             .catch(err => {
                 console.log("error ==", err)
             })
@@ -129,32 +160,39 @@ function Cart() {
                         <Row>
                             {
                                 post && post.length > 0 ? post.map((ele, i) => {
-                                    c = c + parseInt(ele.productId.cost);
-                                    localStorage.setItem("cost", c);
-                                    return (
-                                        <Row sm={1} key={'product-' + i}>
-                                            <br />
-                                            <br />
-                                            <Link to={"/DisplayProduct/" + ele._id}>
+                                    if (ele.productId != null) {
+                                        return (
+                                            <Row sm={1} key={'product-' + i}>
+                                                <br />
+                                                <br />
+
                                                 <div class="card" style={{ width: "20rem" }}>
-                                                    <img class="card-img-top" style={{ height: "200px" }} src={ele.productId.images} alt="Card image cap" />
-                                                    <div class="card-img-overlay d-flex justify-content-end">
-                                                        <a href="#" class="card-link text-danger like">
-                                                        </a>
-                                                    </div>
+                                                    <Link to={"/DisplayProduct/" + ele.productId._id}>
+                                                        <img class="card-img-top" style={{ height: "200px" }} src={ele.productId.images} alt="Card image cap" />
+                                                    </Link>
                                                     <div class="card-body">
                                                         <h5 class="card-title">{ele.productId.name}</h5>
                                                         <div class="buy d-flex justify-content-between align-items-center">
                                                             <div class="price text-info"><h5 class="mt-4">Rs. {ele.productId.cost}</h5></div>
+                                                            <div class="price text-info"><h5 class="mt-4">{ele.count}</h5></div>
+                                                        </div>
+                                                        <div className="center-block">
+                                                            <button className="btn btn-danger btn-lg" onClick={(event) => { removeCart(ele.productId._id, event) }}><i className="far fa-trash-alt"></i></button>
+                                                            <div className="btn-group" role="group" aria-label="Basic example">
+                                                                <button type="button" className="btn btn-secondary" onClick={(event) => { changeItem(ele.count, true, ele._id, event) }}>-</button>
+                                                                <button type="button" className="btn btn-secondary">{ele.count}</button>
+                                                                <button type="button" className="btn btn-secondary" onClick={(event) => { changeItem(ele.count, false, ele._id, event) }}>+</button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <br />
                                                 </div>
                                                 <br />
-                                            </Link>
-                                            <br />
-                                        </Row>
-                                    )
+
+                                                <br />
+                                            </Row>
+                                        )
+                                    }
                                 }
 
                                 ) : <div class="row">
@@ -169,11 +207,16 @@ function Cart() {
                                 <SummaryTitle>ORDER SUMMARY</SummaryTitle>
                                 <hr />
                                 {
-                                    post && post.length > 0 ? post.map((ele, i) =>
-                                        <SummaryItem>
-                                            <SummaryItemText>{ele.productId.name}</SummaryItemText>
-                                            <SummaryItemPrice>Rs. {ele.productId.cost}</SummaryItemPrice>
-                                        </SummaryItem>
+                                    post && post.length > 0 ? post.map((ele, i) => {
+                                        if (ele.productId != null) {
+                                            return (
+                                                <SummaryItem>
+                                                    <SummaryItemText>{ele.count} x {ele.productId.name}</SummaryItemText>
+                                                    <SummaryItemPrice>Rs. {ele.count * parseInt(ele.productId.cost)}</SummaryItemPrice>
+                                                </SummaryItem>
+                                            )
+                                        }
+                                    }
                                     ) : <div></div>
                                 }
                                 <SummaryItem>
@@ -183,7 +226,7 @@ function Cart() {
                                 <hr />
                                 <SummaryItem>
                                     <SummaryItemText>Bag Total</SummaryItemText>
-                                    <SummaryItemPrice>Rs. {localStorage.getItem("cost")}</SummaryItemPrice>
+                                    <SummaryItemPrice>Rs. {post.length > 0 ? localStorage.getItem("total") : 0}</SummaryItemPrice>
                                 </SummaryItem>
                                 <div class="col-md-12 text-center">
                                     <button class="btn btn-info btn-lg" onClick={order} style={{ align: 'center' }}>Checkout Now</button>
@@ -212,4 +255,4 @@ function Cart() {
 }
 
 
-export default Cart;
+export default Cart

@@ -8,7 +8,7 @@ const requirelogin = require('../middleware/requirelogin');
 
 //viewing the cart
 
-router.get('/ecart/cart/view', requirelogin, (req, res) => {
+router.get('/cart/view', requirelogin, (req, res) => {
     Cart.find({ userId: req.user._id }).populate("productId").exec((err, result) => {
         if (err) {
             return res.status(422).json({ error: err })
@@ -66,10 +66,27 @@ router.post('/cart/cartadd', requirelogin, (req, res) => {
 
 });
 
+
+router.post('/cart/cartupdate', requirelogin, (req, res) => {
+    if (req.body.count > 0) {
+        Cart.findByIdAndUpdate(req.body.cartId, { $set: { count: req.body.count } }, { new: true }, (err, data) => {
+            if (!err) {
+                res.status(200).json({
+                    code: 200, message: 'updated',
+                    updateCart: data
+                })
+            } else {
+                console.log(err);
+            }
+        });
+
+    }
+
+});
+
 // mycart (deleting a product)
-
-router.delete('/ecart/cart/delete/:id', requirelogin, (req, res) => {
-    Cart.deleteOne({ productId: req.params.id }, (err, data) => {
+router.delete('/cart/delete/:id', requirelogin, (req, res) => {
+    Cart.deleteOne({ productId: req.params.id, userId: req.user._id }, (err, data) => {
         if (!err) {
             res.status(200).json({
                 code: 200, message: 'deleted',
@@ -79,17 +96,5 @@ router.delete('/ecart/cart/delete/:id', requirelogin, (req, res) => {
     });
 });
 
-
-router.delete('/ecart/cart/deleteall', requirelogin, (req, res) => {
-    Cart.deleteMany({ userId: req.user._id }, (err, data) => {
-        if (!err) {
-            res.status(200).json({
-                code: 200, message: 'deleted',
-                deleteCart: data
-            });
-            console.log(req.user._id)
-        }
-    });
-});
 
 module.exports = router

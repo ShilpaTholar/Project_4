@@ -1,14 +1,14 @@
-const { ObjectID } = require("mongodb");
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
 
 const expenseSchema = new mongoose.Schema({
-    cost: {
-        type: String,
-        required: true
+    userId: {
+        type: ObjectId,
+        ref: "User"
     },
-    shopId: [{ type: ObjectId, ref: "User" }],
-    productId: [{ type: ObjectId, ref: "Product" }],
+    count: { type: Number, required: true },
+    productId: { type: ObjectId, ref: "Product" },
+    created_at: { type: Date, default: Date.now }
 })
 
 mongoose.model("Expense", expenseSchema);
