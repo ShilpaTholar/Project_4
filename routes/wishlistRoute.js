@@ -6,8 +6,19 @@ const Wishlist = mongoose.model("Wishlist");
 const Review = mongoose.model("Review");
 
 
+
+router.get('/wishlist/showremove/:id', requirelogin, (req, res) => {
+    Wishlist.find({ userId: req.user._id, productId: req.params.id }).exec((err, result) => {
+        if (err) {
+            return res.status(422).json({ error: err })
+        } else {
+            res.json(result)
+        }
+    })
+});
+
 //wishlist (adding a product)
-router.post('/ecart/wishlist/add', requirelogin, (req, res) => {
+router.post('/wishlist/wishlistadd', requirelogin, (req, res) => {
     const wishlist = new Wishlist({
         userId: req.user._id,
         productId: req.body.productId
@@ -25,8 +36,8 @@ router.post('/ecart/wishlist/add', requirelogin, (req, res) => {
 });
 
 //wishlist (deleting a product)
-router.delete('/ecart/wishlist/delete/:id', requirelogin, (req, res) => {
-    Wishlist.findByIdAndRemove(req.params.id, (err, data) => {
+router.delete('/wishlist/delete/:id', requirelogin, (req, res) => {
+    Wishlist.deleteOne({ productId: req.params.id }, (err, data) => {
         if (!err) {
             res.status(200).json({
                 code: 200, message: 'deleted',
@@ -37,7 +48,7 @@ router.delete('/ecart/wishlist/delete/:id', requirelogin, (req, res) => {
 });
 
 //viewing the wishlist shilps and anusha ye use karo XD
-router.get('/ecart/wishlist/view', requirelogin, (req, res) => {
+router.get('/wishlist/view', requirelogin, (req, res) => {
     Wishlist.find({ userId: req.user._id }).populate("productId").exec((err, result) => {
         if (err) {
             return res.status(422).json({ error: err })
@@ -48,7 +59,7 @@ router.get('/ecart/wishlist/view', requirelogin, (req, res) => {
 });
 
 //add review
-router.post('/ecart/review/add', requirelogin, (req, res) => {
+router.post('/review/add', requirelogin, (req, res) => {
     const review = new Review({
         review: req.body.review,
         userId: req.user._id,
@@ -67,7 +78,7 @@ router.post('/ecart/review/add', requirelogin, (req, res) => {
 })
 
 //get reviews on a product
-router.get('/ecart/review/view', requirelogin, (req, res) => {
+router.get('/review/view', requirelogin, (req, res) => {
     Review.find({ productId: req.user._id }).populate("userId").exec((err, result) => {
         if (err) {
             return res.status(422).json({ error: err })

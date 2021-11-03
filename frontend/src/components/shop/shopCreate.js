@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../App'
-//import '../global.css'
+import Footer from '../footer';
+import '../global.css'
+import NavBar from '../user/nav';
 import UserLogin from '../user/userLogin'
 
 function ShopCreate() {
@@ -47,6 +49,7 @@ function ShopCreate() {
 
     }, [url])
 
+
     const postimage = (event) => {
         event.preventDefault()
         setisClicked(true)
@@ -77,10 +80,11 @@ function ShopCreate() {
     }
     else {
         return (
-            <div>
+            <div style={{ fontFamily: "cursive" }}>
+                <NavBar />
                 <p className="display-5 text-center mt-5">Create Your Shop {state.shopName} Online!!</p>
                 <div >
-                    <form className="container col-6">
+                    <form className="shopCreateForm container col-6 mb-5 mt-5">
                         <div className="row mb-3">
                             <div className="col">
                                 <label className="form-label">Product Name</label>
@@ -98,7 +102,7 @@ function ShopCreate() {
                             </div>
                             <div className="col">
                                 <label className="form-label">Cost</label>
-                                <input type="text" className="form-control" onChange={(e) => setcost(e.target.value)} placeholder="const" />
+                                <input type="text" className="form-control" onChange={(e) => setcost(e.target.value)} placeholder="cost" />
                             </div>
                         </div>
                         <div className="row mb-3">
@@ -134,14 +138,12 @@ function ShopCreate() {
                                 </button>
                             </div>
                             <div className="col">
-                                <button className="btn btn-outline-info">
-                                    Add More!
-                                </button>
+                                <input type="Reset" className="btn btn-outline-info" value="Add More!" />
                             </div>
                         </div>
                     </form>
                 </div>
-
+                <Footer />
             </div>
         )
     }

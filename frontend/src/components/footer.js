@@ -1,11 +1,12 @@
 import React from 'react'
-import './landinpagecss.css';
+import './footer.css'
+import { Link } from "react-router-dom";
 
 function Footer() {
 
     return (
-        <div className="container my-2 w-100" style={{ backgroundColor: "#83c1ff" }}>
-            <footer className="text-center text-lg-start text-white">
+        <div className="myfooter mt-5">
+            <footer className="text-center text-lg-start">
                 <div className="container p-4 pb-0">
                     <section className="">
                         <div className="row">
@@ -21,7 +22,7 @@ function Footer() {
                             <div className="col-lg-4 col-md-6 mb-4 mb-md-0">
                                 <h5 className="ps-3">Useful Links</h5>
                                 <ul style={{ listStyleType: "none" }}>
-                                    <li>Explore Products</li>
+                                    <li><Link>Explore Products</Link></li>
                                     <li>My Cart</li>
                                     <li>My Wishlist</li>
                                     <li>Create My Shop</li>
@@ -29,15 +30,15 @@ function Footer() {
                             </div>
                             <div className="col-lg-4 my-3">
                                 <div className="row">
-                                    <p className="text-center lead">Get Weekly Updates from</p>
-                                    <p className="text-center lead">ShopEase</p>
-                                    <p className="text-center lead">Sign up For Our Newsletter</p>
+                                    <h5 className="text-center lead">Get Weekly Updates from</h5>
+                                    <h5 className="text-center lead">ShopEase</h5>
+                                    <h5 className="text-center lead">Sign up For Our Newsletter</h5>
                                 </div>
                                 <div className="row textbox" style={{ margin: "10px auto", width: "100%" }} >
                                     <input className="form-control" type="text"></input>
                                 </div>
                                 <div className="row">
-                                    <button style={{ margin: "10px auto", width: "40%" }} className="btn">Sign up</button>
+                                    <button style={{ margin: "10px auto", width: "40%" }} className="btn btn-info">Sign up</button>
                                 </div>
                             </div>
                         </div>

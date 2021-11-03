@@ -56,35 +56,12 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap");
 
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-body {
-   background: #212f3d; 
-  font-family: "Lato", sans-serif;
-  color: #f7f7f7; 
-} */
-
-/* #page-wrapper {
-  position: relative;
-} */
 body{
-  background:rgb(225, 243, 248);
+  background:rgba(225, 238, 248,0.7);
 
 }
-/* header {
-   position: fixed; 
-  min-height: 75px;
-  display: flex;
-  justify-content: space-between; 
-  align-items: center;
-  padding: 0 20px;
- 
-  width: 100%;
-}  */
+
 #nav
 {
   position: fixed; 
@@ -94,26 +71,6 @@ body{
   font-family:cursive;
 }
 
-/* @media (max-width: 875px) {
-  header {
-    flex-wrap: wrap;
-  }
-}
-
-
-@media (max-width: 875px) {
-  .logo {
-    position: relative;
-    width: 100%;
-    margin-top: 15px;
-  }
-  .logo img {
-    margin: 0 auto;
-  }
-  .logo img:hover {
-    transform: none;
-  }
-} */
 
 #connect{
   color:#222
@@ -145,11 +102,6 @@ body{
   }
 }
 
-.container {
-  max-width: 1000px;
-  width: 100%;
-  margin: 0 auto;
-}
 
 .grid {
   display: flex;
@@ -259,23 +211,8 @@ body{
   }
 }
 
-.footer {
-  color:black;
-  background: hsla(33, 100%, 50%, 0.8);
-  padding: 20px 50px;
-}
 
-.footer ul {
-  display: flex;
-  justify-content: flex-end;
-}
 
-.footer li {
-  list-style: none;
-  letter-spacing: 1px;
-  padding-left: 30px;
-  line-height: 2.5;
-}
 
 
 

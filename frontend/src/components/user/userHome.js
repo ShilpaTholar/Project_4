@@ -5,6 +5,7 @@ import { useHistory, Link } from "react-router-dom";
 import NavBar from './nav';
 import UserLogin from './userLogin';
 import { UserContext } from '../../App'
+import Footer from '../footer';
 
 function UserHome() {
   const [product, setProduct] = useState('');
@@ -58,14 +59,6 @@ function UserHome() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    // setLoading(true);
-    // console.log("search is", search)
-    // const baseUrl = `http://localhost:5000/shop/display/${search}`;
-    // axios.get(baseUrl).then((response) => {
-    //   setPost(response.data);
-    //   setLoading(false);
-    //   console.log(response.data);
-    // });
     fetch(`http://localhost:5000/shop/display/${search}`, {
       method: 'get',
       headers: {
@@ -157,18 +150,13 @@ function UserHome() {
 
                         <div className="col-4" key={'product-' + i}>
                           <Link to={"/DisplayProduct/" + ele._id}>
+                            <br></br>
                             <div className="card" style={{ width: "90%" }}>
                               <img className="card-img-top" style={{ width: "100%", height: "150px" }} src={ele.images} alt="Card image cap" />
-                              <div className="card-img-overlay d-flex justify-content-end">
-                                <a href="#" className="card-link text-danger like">
-                                  <i className="fas fa-heart"></i>
-                                </a>
-                              </div>
                               <div className="card-body">
                                 <h5 className="card-title">{ele.name}</h5>
                                 <div className="buy d-flex justify-content-between align-items-center">
                                   <div className="price text-info"><h5 className="mt-4">Rs. {ele.cost}</h5></div>
-                                  <a href="#solo" className="btn btn-info mt-3"><i className="fas fa-shopping-cart"></i> Add to Cart</a>
                                 </div>
                               </div>
                             </div>
@@ -183,18 +171,13 @@ function UserHome() {
 
                         <div className="col-4" key={'product-' + i}>
                           <Link to={"/DisplayProduct/" + ele._id}>
+                            <br></br>
                             <div className="card" style={{ width: "90%" }}>
                               <img className="card-img-top" style={{ width: "100%", height: "150px" }} src={ele.images} alt="Card image cap" />
-                              <div className="card-img-overlay d-flex justify-content-end">
-                                <a href="#" className="card-link text-danger like">
-                                  <i className="fas fa-heart"></i>
-                                </a>
-                              </div>
                               <div className="card-body">
                                 <h5 className="card-title">{ele.name}</h5>
                                 <div className="buy d-flex justify-content-between align-items-center">
                                   <div className="price text-info"><h5 className="mt-4">Rs. {ele.cost}</h5></div>
-                                  <a href="#solo" className="btn btn-info mt-3"><i className="fas fa-shopping-cart"></i> Add to Cart</a>
                                 </div>
                               </div>
                             </div>
@@ -208,7 +191,7 @@ function UserHome() {
           </div>
 
         </div>
-
+        <Footer />
       </>
     )
   }

@@ -6,6 +6,9 @@ import './shop.css';
 import { useHistory, Link } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../../App'
+import NavBar from './nav';
+import Footer from '../footer';
+import UserLogin from './userLogin';
 
 function Wishlist() {
     const [post, setPost] = useState('');
@@ -29,16 +32,19 @@ function Wishlist() {
     }, [])
 
 
-
+    if (!state) {
+        return <UserLogin />
+    }
     return (
-        <div className="container">
+        <div>
+            <NavBar />
             <h3 className="wishlist">YOUR WISHLIST</h3>
-            <div className="row">
+            <div className="row container">
                 {
                     post && post.length > 0 ? post.map((ele, i) =>
                         <div className="col-3" key={'product-' + i}>
                             <br />
-                            <Link to={"/Afterwishlist/" + ele.productId._id + "/" + ele._id}>
+                            <Link to={"/Afterwishlist/" + ele.productId._id}>
                                 <div class="card" style={{ width: "90%" }}>
                                     <img class="card-img-top" style={{ width: "100%", height: "150px" }} src={ele.productId.images} alt="Card image cap" />
                                     <div class="card-img-overlay d-flex justify-content-end">
@@ -62,7 +68,7 @@ function Wishlist() {
                     </div>
                 }
             </div>
-
+            <Footer />
         </div>
     )
 
