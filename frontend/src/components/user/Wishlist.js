@@ -14,7 +14,7 @@ function Wishlist() {
     const [post, setPost] = useState('');
     const { state, dispatch } = useContext(UserContext);
     useEffect(() => {
-        fetch("http://localhost:5000/ecart/wishlist/view", {
+        fetch("http://localhost:5000/wishlist/view", {
             method: "get",
             headers: {
                 "Content-Type": "application/json",
@@ -44,7 +44,7 @@ function Wishlist() {
                     post && post.length > 0 ? post.map((ele, i) =>
                         <div className="col-3" key={'product-' + i}>
                             <br />
-                            <Link to={"/Afterwishlist/" + ele.productId._id}>
+                            <Link to={"/DisplayProduct/" + ele.productId._id}>
                                 <div class="card" style={{ width: "90%" }}>
                                     <img class="card-img-top" style={{ width: "100%", height: "150px" }} src={ele.productId.images} alt="Card image cap" />
                                     <div class="card-img-overlay d-flex justify-content-end">
@@ -55,7 +55,6 @@ function Wishlist() {
                                         <h5 class="card-title">{ele.productId.name}</h5>
                                         <div class="buy d-flex justify-content-between align-items-center">
                                             <div class="price text-info text-center" style={{ textalign: "center" }}><h5 class="mt-4">Rs. {ele.productId.cost}</h5></div>
-                                            {/* <a href="#solo" class="btn btn-info mt-3"><i class="fas fa-shopping-cart"></i> Add to Cart</a> */}
                                         </div>
                                     </div>
                                 </div>

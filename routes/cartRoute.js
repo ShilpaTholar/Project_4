@@ -40,7 +40,6 @@ router.post('/cart/cartadd', requirelogin, (req, res) => {
         count: req.body.count
     });
     if (req.body.count > 1 && req.body.cartId != 0) {
-        console.log("yooooooooo", req.body.cartId)
         Cart.findByIdAndUpdate(req.body.cartId, { $set: { count: req.body.count } }, { new: true }, (err, data) => {
             if (!err) {
                 res.status(200).json({

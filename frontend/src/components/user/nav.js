@@ -31,10 +31,10 @@ function NavBar() {
                                 state.shopName ?
                                     <>
                                         <li className="nav-item">
-                                            <Link to="/shopCreate" className="nav-link active" aria-current="page">Create Shop</Link>
+                                            <Link to="/shopCreate" className="nav-link active" aria-current="page" style={{ color: "#0dcaf0" }}>Create Shop</Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link to="/shopUpdate" className="nav-link active" >Update Shop</Link>
+                                            <Link to="/shopUpdate" className="nav-link active" style={{ color: "#0dcaf0" }}>Update Shop</Link>
                                         </li>
                                     </>
                                     :
@@ -43,19 +43,19 @@ function NavBar() {
                         </ul>
                         <ul class="nav navbar-nav ml-auto">
                             <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/userHome"><i className="fas fa-home"></i></Link>
+                                <Link className="nav-link active" aria-current="page" to="/userHome"><i style={{ color: "#0dcaf0" }} className="fas fa-home"></i></Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/Cart"><i className="fas fa-shopping-cart"></i></Link>
+                                <Link className="nav-link active" aria-current="page" to="/Cart"><i style={{ color: "#0dcaf0" }} className="fas fa-shopping-cart"></i></Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link active" to="/wishlist"><i className="fas fa-heart"></i></Link>
+                                <Link className="nav-link active" to="/wishlist"><i style={{ color: "#0dcaf0" }} className="fas fa-heart"></i></Link>
                             </li>
                             <li>
-                                <Link className="nav-link active" to="/userProfile"><i class="fas fa-user"></i></Link>
+                                <Link className="nav-link active" to="/userProfile"><i style={{ color: "#0dcaf0" }} className="fas fa-user"></i></Link>
                             </li>
                             <li>
-                                <Link className="nav-link active" onClick={logout}><i class="fas fa-sign-out-alt"></i></Link>
+                                <Link className="nav-link active" onClick={logout}><i style={{ color: "#0dcaf0" }} className="fas fa-sign-out-alt"></i></Link>
                             </li>
                         </ul>
                     </div>

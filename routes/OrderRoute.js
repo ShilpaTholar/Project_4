@@ -31,6 +31,18 @@ router.post('/orders/add', requirelogin, (req, res) => {
 });
 
 
+router.get("/expense/getall", requirelogin, (req, res) => {
+    Expense.find({ shopId: req.user._id }).sort({ "count": 'ascending' }).populate("productId", "cost").select({ count: 1, created_at: 1, cost: 1 }).then(result => {
+        console.log(result)
+        res.status(200).json({
+            expense: result
+        })
+    }).catch(err => {
+        console.log(err)
+    })
+})
+
+
 
 module.exports = router
 

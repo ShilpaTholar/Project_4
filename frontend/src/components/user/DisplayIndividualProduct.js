@@ -149,7 +149,7 @@ const DisplayIndividualProduct = () => {
       <NavBar />
       <section style={{ height: "auto" }}>
         <div className="container py-1">
-          <div className="row d-flex justify-content-center align-items-center h-30">
+          <div className="row d-flex justify-content-center align-items-center">
             <div className="col">
               <div className="card card-registration my-4">
                 <div className="row" style={{ height: "40rem" }}>
@@ -165,8 +165,6 @@ const DisplayIndividualProduct = () => {
                     <div className="card-body p-md-5 text-black">
                       <h5 className="mb-5 text-uppercase" id="display">{post.name}</h5>
                       <hr />
-                      <br />
-
                       <div className="row">
                         <div className="col-12 mb-3">
                           <div>
@@ -181,20 +179,14 @@ const DisplayIndividualProduct = () => {
                           <h3>Rs.{post.cost}</h3>
                         </div>
                       </div>
-                      <div className="row">
-                        <div className="col-12 mb-3">
-                          <h3 id="data">Quantity: </h3>
-                          <h3>{post.quantity}</h3>
-                        </div>
-                      </div>
                       <div className="center-block">
                         {
                           wishlistsnapshot.length > 0 ?
-                            <button className="btn btn-danger btn-lg" onClick={removefromWishlist}><i className="fas fa-heart"></i>Remove From Wishlist</button>
+                            <button className="btn btn-danger me-3" onClick={removefromWishlist}><i className="fas fa-heart"></i>Remove From Wishlist</button>
                             :
-                            <button className="btn btn-info btn-lg" onClick={wishlist}><i className="fas fa-heart"></i>Add To Wishlist</button>
+                            <button className="btn btn-info me-3" onClick={wishlist}><i className="fas fa-heart"></i>Add To Wishlist</button>
                         }
-                        <button className="btn btn-info btn-lg me-3" onClick={addtocart}><i className="fas fa-shopping-cart"></i>Add To Cart</button>
+                        <button className="btn btn-info " onClick={addtocart}><i className="fas fa-shopping-cart"></i>Add To Cart</button>
                       </div>
                     </div>
                   </div>
@@ -212,8 +204,15 @@ const DisplayIndividualProduct = () => {
         contentLabel="Example Modal"
       >
         <div className="row">
-          <i className="col-1 far fa-times-circle" onClick={closeModal}></i>
-          <p className="col-11 lead">Added</p>
+          <i className="far fa-times-circle" onClick={closeModal}></i>
+          <div className="row mt-3">
+            <div className="col-2">
+              <i style={{ color: "#0dcaf0" }} className="fas fa-shopping-basket"></i>
+            </div>
+            <div className="col-10">
+              <p >Product Added!</p>
+            </div>
+          </div>
         </div>
       </Modal>
       <Footer />

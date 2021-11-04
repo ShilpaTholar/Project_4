@@ -119,17 +119,20 @@ function UserHome() {
               <input type="text" className="form-control col-10" style={{ width: "150px" }} onChange={(e) => { setsearch(e.target.value) }} placeholder="search products..." />
               <input className="btn btn-info col-2" type="submit" value="Go!" onClick={handleClick} />
             </form>
-            <p className="lead">Apply Filters</p>
+            <p className="lead mt-4">Apply Filters</p>
             <div className="myfilters">
-              <div className="filterNames">
+              <div className="row">
                 {filters.map((name, index) => {
                   return (
-                    <div className="row">
-
-                      <label>
-                        <input className="form-check-input" type="checkbox" checked={checkedState[index]} onChange={() => handleOnChange(index)} />
-                      </label>
-                      <p>{name}</p>
+                    <div className="row" key={index}>
+                      <div className="col-2">
+                        <label>
+                          <input className="form-check-input" type="checkbox" checked={checkedState[index]} onChange={() => handleOnChange(index)} />
+                        </label>
+                      </div>
+                      <div className="col-10">
+                        <p>{name}</p>
+                      </div>
                     </div>
                   )
                 })}

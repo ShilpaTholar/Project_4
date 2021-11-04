@@ -11,7 +11,6 @@ import ShopUpdate from './components/shop/shopUpdate';
 import UserSignup from './components/user/userSignup';
 import ShopCreate from './components/shop/shopCreate';
 import ShopEdit from './components/shop/shopEdit';
-import Aftercart from './components/user/Aftercart';
 import Cart from './components/user/Cart';
 import Landingpage from './components/Landingpage'
 
@@ -43,7 +42,6 @@ const Routing = () => {
         <Route exact path="/Landingpage" component={Landingpage}></Route>
         <Route exact path="/userProfile" component={Userprofile}></Route>
         <Route exact path="/wishlist" component={Wishlist}></Route>
-        <Route exact path="/Aftercart/:id" component={Aftercart}></Route>
         <Route exact path="/shopUpdate" component={ShopUpdate}></Route>
         <Route exact path="/shopCreate" component={ShopCreate}></Route>
         <Route exact path="/shopEdit/:id" component={ShopEdit}></Route>

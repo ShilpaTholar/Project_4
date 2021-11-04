@@ -1,3 +1,4 @@
+import React from 'react';
 import { useHistory, Link } from "react-router-dom";
 import { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../App';
@@ -5,6 +6,7 @@ import './shop.css';
 import UserLogin from "./userLogin";
 import NavBar from "./nav";
 import Footer from "../footer";
+import VisualData from './visualdata';
 
 
 function Userprofile() {
@@ -41,6 +43,9 @@ function Userprofile() {
                     </div>
                 </div>
                 <h3 className="wishlist" id="order">My orders</h3>
+                <div className="m-4">
+                    <VisualData />
+                </div>
                 <Footer />
             </>
         )

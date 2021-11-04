@@ -177,7 +177,7 @@ function Cart() {
                                                             <div class="price text-info"><h5 class="mt-4">{ele.count}</h5></div>
                                                         </div>
                                                         <div className="center-block">
-                                                            <button className="btn btn-danger btn-lg" onClick={(event) => { removeCart(ele.productId._id, event) }}><i className="far fa-trash-alt"></i></button>
+                                                            <button className="btn btn-danger me-2" onClick={(event) => { removeCart(ele.productId._id, event) }}><i className="far fa-trash-alt"></i></button>
                                                             <div className="btn-group" role="group" aria-label="Basic example">
                                                                 <button type="button" className="btn btn-secondary" onClick={(event) => { changeItem(ele.count, true, ele._id, event) }}>-</button>
                                                                 <button type="button" className="btn btn-secondary">{ele.count}</button>
