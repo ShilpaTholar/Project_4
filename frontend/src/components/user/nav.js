@@ -9,7 +9,8 @@ function NavBar() {
     const { state, dispatch } = useContext(UserContext);
     const history = useHistory();
 
-    const logout = () => {
+    const logout = (e) => {
+        e.preventDefault()
         localStorage.clear()
         dispatch({ type: "CLEAR" })
         history.push('/userLogin')

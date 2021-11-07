@@ -13,19 +13,19 @@ function Footer() {
                             <div className="col-lg-4 col-md-6 mb-4 mb-md-0">
                                 <h5 className="text-uppercase">About Us</h5>
                                 <p>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                    Molestiae modi cum ipsam ad, illo possimus laborum ut
-                                    reiciendis obcaecati. Ducimus, quas. Corrupti, pariatur eaque?
-                                    Reiciendis assumenda iusto sapiente inventore animi?
+                                    We make sure you recieve your product as soon as we have finished making it.
+                                    We also provide free returns if you are not satisfied.
+                                    For every purchase you make, we will ensure there are no damages or faults
+                                    and we will check and test the product.
                                 </p>
                             </div>
                             <div className="col-lg-4 col-md-6 mb-4 mb-md-0">
                                 <h5 className="ps-3">Useful Links</h5>
                                 <ul style={{ listStyleType: "none" }}>
                                     <li><Link>Explore Products</Link></li>
-                                    <li>My Cart</li>
-                                    <li>My Wishlist</li>
-                                    <li>Create My Shop</li>
+                                    <li><Link>My Cart</Link></li>
+                                    <li><Link>My Wishlist</Link></li>
+                                    <li><Link>Create My Shop</Link></li>
                                 </ul>
                             </div>
                             <div className="col-lg-4 my-3">

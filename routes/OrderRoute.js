@@ -32,7 +32,7 @@ router.post('/orders/add', requirelogin, (req, res) => {
 
 
 router.get("/expense/getall", requirelogin, (req, res) => {
-    Expense.find({ shopId: req.user._id }).sort({ "count": 'ascending' }).populate("productId", "cost").select({ count: 1, created_at: 1, cost: 1 }).then(result => {
+    Expense.find({ userId: req.user._id }).sort({ "count": 'ascending' }).populate("productId", "cost").select({ count: 1, created_at: 1, cost: 1 }).then(result => {
         console.log(result)
         res.status(200).json({
             expense: result
@@ -41,6 +41,16 @@ router.get("/expense/getall", requirelogin, (req, res) => {
         console.log(err)
     })
 })
+
+router.get('/ecart/orders/view', requirelogin, (req, res) => {
+    Order.find({ userId: req.user._id }).populate("productId").exec((err, result) => {
+        if (err) {
+            return res.status(422).json({ error: err })
+        } else {
+            res.json(result)
+        }
+    })
+});
 
 
 
