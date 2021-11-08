@@ -1,15 +1,15 @@
 const express = require('express');
+
 const router = express.Router();
 const mongoose = require("mongoose");
 const requirelogin = require('../middleware/requirelogin');
 const Order = mongoose.model("Order");
 const Cart = mongoose.model("Cart");
 const Expense = mongoose.model("Expense")
+const Product = mongoose.model("Product");
 
 
 router.post('/orders/add', requirelogin, (req, res) => {
-    console.log(req.body.items)
-    console.log(req.body.items.length)
     Order.insertMany(req.body.items).then((result) => {
         Cart.deleteMany({ userId: req.user._id }).then((cartRes) => {
             Expense.insertMany(req.body.items).then((expenseRes) => {
@@ -32,13 +32,19 @@ router.post('/orders/add', requirelogin, (req, res) => {
 
 
 router.get("/expense/getall", requirelogin, (req, res) => {
-    Expense.find({ userId: req.user._id }).sort({ "count": 'ascending' }).populate("productId", "cost").select({ count: 1, created_at: 1, cost: 1 }).then(result => {
-        console.log(result)
+    Expense.find().populate({
+        path: "productId",
+        select: "shopId cost",
+        match: {
+            shopId: {
+                $eq: req.user._id
+            }
+        }
+    }).then(result => {
+        console.log("res iss", result)
         res.status(200).json({
             expense: result
-        })
-    }).catch(err => {
-        console.log(err)
+        });
     })
 })
 

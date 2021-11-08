@@ -10,7 +10,7 @@ function Footer() {
                 <div className="container p-4 pb-0">
                     <section className="">
                         <div className="row">
-                            <div className="col-lg-4 col-md-6 mb-4 mb-md-0">
+                            <div className="mb-4 mb-md-0 text-center">
                                 <h5 className="text-uppercase">About Us</h5>
                                 <p>
                                     We make sure you recieve your product as soon as we have finished making it.
@@ -18,28 +18,6 @@ function Footer() {
                                     For every purchase you make, we will ensure there are no damages or faults
                                     and we will check and test the product.
                                 </p>
-                            </div>
-                            <div className="col-lg-4 col-md-6 mb-4 mb-md-0">
-                                <h5 className="ps-3">Useful Links</h5>
-                                <ul style={{ listStyleType: "none" }}>
-                                    <li><Link>Explore Products</Link></li>
-                                    <li><Link>My Cart</Link></li>
-                                    <li><Link>My Wishlist</Link></li>
-                                    <li><Link>Create My Shop</Link></li>
-                                </ul>
-                            </div>
-                            <div className="col-lg-4 my-3">
-                                <div className="row">
-                                    <h5 className="text-center lead">Get Weekly Updates from</h5>
-                                    <h5 className="text-center lead">ShopEase</h5>
-                                    <h5 className="text-center lead">Sign up For Our Newsletter</h5>
-                                </div>
-                                <div className="row textbox" style={{ margin: "10px auto", width: "100%" }} >
-                                    <input className="form-control" type="text"></input>
-                                </div>
-                                <div className="row">
-                                    <button style={{ margin: "10px auto", width: "40%" }} className="btn btn-info">Sign up</button>
-                                </div>
                             </div>
                         </div>
                     </section>

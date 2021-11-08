@@ -15,8 +15,13 @@ function VisualData() {
             }
         }).then(res => res.json())
             .then(result => {
-                setexpense(result.expense)
-                console.log(result)
+                var x = []
+                result.expense.map(ele => {
+                    if (ele.productId != null) {
+                        x.push(ele)
+                    }
+                })
+                setexpense(x)
             }).catch(err => {
                 console.log('errr=', err)
             })
