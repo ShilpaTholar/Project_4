@@ -15,6 +15,7 @@ function UserHome() {
   const filters = ['Ration', 'Desserts', 'Cloths', 'Cosmetics']
   const [hasfilters, sethasfilters] = useState([]);
   const [search, setsearch] = useState("")
+  const [searchRes, setSearchRes] = useState([])
   const [showCustom, setshowCustom] = useState(false);
   const history = useHistory();
   const { state, dispatch } = useContext(UserContext);
@@ -51,21 +52,23 @@ function UserHome() {
         }).catch(err => {
           console.log('errr=', err)
         })
-
-      fetch('http://localhost:5000/myshop', {
-        method: 'get',
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + localStorage.getItem("jwt")
+      if (state) {
+        if (state.shopName) {
+          fetch('http://localhost:5000/myshop', {
+            method: 'get',
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + localStorage.getItem("jwt")
+            }
+          }).then(res => res.json())
+            .then(result => {
+              setPost(result)
+              console.log(result)
+            }).catch(err => {
+              console.log('errr=', err)
+            })
         }
-      }).then(res => res.json())
-        .then(result => {
-          setPost(result)
-          console.log(result)
-        }).catch(err => {
-          console.log('errr=', err)
-        })
-
+      }
     }
 
 
@@ -74,20 +77,14 @@ function UserHome() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    fetch(`http://localhost:5000/shop/display/${search}`, {
-      method: 'get',
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + localStorage.getItem("jwt")
+    var x1 = []
+    console.log(search)
+    post.filter(item => {
+      if (item.productType.toLowerCase() == search.toLowerCase() || item.description.toLowerCase().includes(search.toLowerCase()) || item.name.toLowerCase().includes(search.toLowerCase())) {
+        x1.push(item)
       }
-    }).then(res => res.json())
-      .then(result => {
-        setPost(result)
-        console.log(result)
-      }).catch(err => {
-        console.log('errr=', err)
-      })
-
+    })
+    setSearchRes(x1)
   }
 
   function applyfilter() {
@@ -160,6 +157,44 @@ function UserHome() {
                 </div>
               </div>
               <div className="col-9">
+                <div className="row">
+                  {
+                    (search && searchRes.length > 0) ?
+                      <>
+                        <p className="text-left mt-2 lead">Found {searchRes.length} Result(s)</p>
+                      </>
+                      :
+                      <></>
+                  }
+                  {
+                    ((searchRes && searchRes.length > 0) || hasfilters.length == 0 || post.length == 0) ?
+                      searchRes.map((ele, i) => {
+
+                        return (
+
+                          <div className="col-4" key={'product-' + i}>
+                            <Link to={"/DisplayProduct/" + ele._id}>
+                              <br></br>
+                              <div className="card" style={{ width: "90%" }}>
+                                <img className="card-img-top" style={{ width: "100%", height: "150px" }} src={ele.images} alt="Card image cap" />
+                                <div className="card-body">
+                                  <h5 className="card-title">{ele.name}</h5>
+                                  <div className="buy d-flex justify-content-between align-items-center">
+                                    <div className="price text-info"><h5 className="mt-4">Rs. {ele.cost}</h5></div>
+                                  </div>
+                                </div>
+                              </div>
+                            </Link>
+                          </div>
+
+                        )
+                      })
+                      :
+                      <div className="row">
+                        <div className="alert alert-info">No products found</div>
+                      </div>
+                  }
+                </div>
                 <div className="row">
                   {
                     loading ? <div>Loading.....</div> :

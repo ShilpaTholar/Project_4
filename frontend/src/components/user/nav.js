@@ -39,20 +39,12 @@ function NavBar() {
                                 </ul> :
                                 <ul className="nav navbar-nav ml-auto">
                                     <li className="nav-item">
-                                        <Link className="nav-link active" aria-current="page" to="/userHome"><i style={{ color: "#0dcaf0" }} className="fas fa-home"></i></Link>
-                                    </li>
-                                    <li className="nav-item">
                                         <Link className="nav-link active" aria-current="page" to="/Cart"><i style={{ color: "#0dcaf0" }} className="fas fa-shopping-cart"></i></Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link className="nav-link active" to="/wishlist"><i style={{ color: "#0dcaf0" }} className="fas fa-heart"></i></Link>
                                     </li>
-                                    <li>
-                                        <Link className="nav-link active" to="/userProfile"><i style={{ color: "#0dcaf0" }} className="fas fa-user"></i></Link>
-                                    </li>
-                                    <li>
-                                        <Link className="nav-link active" onClick={logout}><i style={{ color: "#0dcaf0" }} className="fas fa-sign-out-alt"></i></Link>
-                                    </li>
+
                                 </ul>
 
                         }
