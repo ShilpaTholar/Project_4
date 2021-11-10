@@ -77,13 +77,13 @@ function UserSignup() {
                                     <div className="row">
                                         <div className="col-md-6">
                                             <div className="form-floating mb-3">
-                                                <input type="text" id="floatingInput" className="form-control" value={password} onChange={(e) => { setpassword(e.target.value) }} placeholder="password" />
+                                                <input type="password" id="floatingInput" className="form-control" value={password} onChange={(e) => { setpassword(e.target.value) }} placeholder="password" />
                                                 <label htmlFor="floatingInput">Password</label>
                                             </div>
                                         </div>
                                         <div className="col-md-6">
                                             <div className="form-floating mb-3">
-                                                <input type="email" className="form-control" id="floatingInput" value={confirmpassword} onChange={(e) => { setconfirmpassword(e.target.value) }} placeholder="comfirm password" />
+                                                <input type="password" className="form-control" id="floatingInput" value={confirmpassword} onChange={(e) => { setconfirmpassword(e.target.value) }} placeholder="comfirm password" />
                                                 <label htmlFor="floatingInput">Confirm Password</label>
                                             </div>
                                         </div>

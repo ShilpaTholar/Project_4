@@ -27,38 +27,35 @@ function NavBar() {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                            {
-                                state.shopName ?
-                                    <>
-                                        <li className="nav-item">
-                                            <Link to="/shopCreate" className="nav-link active" aria-current="page" style={{ color: "#0dcaf0" }}>Create Shop</Link>
-                                        </li>
-                                        <li className="nav-item">
-                                            <Link to="/shopUpdate" className="nav-link active" style={{ color: "#0dcaf0" }}>Update Shop</Link>
-                                        </li>
-                                    </>
-                                    :
-                                    <></>
-                            }
-                        </ul>
-                        <ul class="nav navbar-nav ml-auto">
-                            <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/userHome"><i style={{ color: "#0dcaf0" }} className="fas fa-home"></i></Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to="/Cart"><i style={{ color: "#0dcaf0" }} className="fas fa-shopping-cart"></i></Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link active" to="/wishlist"><i style={{ color: "#0dcaf0" }} className="fas fa-heart"></i></Link>
-                            </li>
-                            <li>
-                                <Link className="nav-link active" to="/userProfile"><i style={{ color: "#0dcaf0" }} className="fas fa-user"></i></Link>
-                            </li>
-                            <li>
-                                <Link className="nav-link active" onClick={logout}><i style={{ color: "#0dcaf0" }} className="fas fa-sign-out-alt"></i></Link>
-                            </li>
-                        </ul>
+                        {
+                            state.shopName ?
+                                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li className="nav-item">
+                                        <Link to="/shopCreate" className="nav-link active" aria-current="page" style={{ color: "#0dcaf0" }}>Create Shop</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/shopUpdate" className="nav-link active" style={{ color: "#0dcaf0" }}>Update Shop</Link>
+                                    </li>
+                                </ul> :
+                                <ul class="nav navbar-nav ml-auto">
+                                    <li className="nav-item">
+                                        <Link className="nav-link active" aria-current="page" to="/userHome"><i style={{ color: "#0dcaf0" }} className="fas fa-home"></i></Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link active" aria-current="page" to="/Cart"><i style={{ color: "#0dcaf0" }} className="fas fa-shopping-cart"></i></Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link className="nav-link active" to="/wishlist"><i style={{ color: "#0dcaf0" }} className="fas fa-heart"></i></Link>
+                                    </li>
+                                    <li>
+                                        <Link className="nav-link active" to="/userProfile"><i style={{ color: "#0dcaf0" }} className="fas fa-user"></i></Link>
+                                    </li>
+                                    <li>
+                                        <Link className="nav-link active" onClick={logout}><i style={{ color: "#0dcaf0" }} className="fas fa-sign-out-alt"></i></Link>
+                                    </li>
+                                </ul>
+
+                        }
                     </div>
                 </div>
             </nav>

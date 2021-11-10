@@ -129,7 +129,7 @@ class Landingpage extends React.Component {
                 <div class="icon"><i class="fa fa-3x fa-fire"></i></div>
                 <div class="desc">
                   <h2>Customer services</h2>
-                  <p>We make sure you recieve your product as soon as we have finished making it. We also provide free returns if you are not satisfied.
+                  <p>We Offer the best after sale service!
                   </p>
                 </div>
               </div>

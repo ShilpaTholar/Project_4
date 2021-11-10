@@ -51,6 +51,21 @@ function UserHome() {
         }).catch(err => {
           console.log('errr=', err)
         })
+
+      fetch('http://localhost:5000/myshop', {
+        method: 'get',
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("jwt")
+        }
+      }).then(res => res.json())
+        .then(result => {
+          setPost(result)
+          console.log(result)
+        }).catch(err => {
+          console.log('errr=', err)
+        })
+
     }
 
 
@@ -112,88 +127,115 @@ function UserHome() {
       <>
         <NavBar></NavBar>
 
-        <div className="row">
-          <div className="col-3 p-5">
-            <button className="btn btn-info mb-2" onClick={customView}>Show Custom View</button>
-            <form className="row">
-              <input type="text" className="form-control col-10" style={{ width: "150px" }} onChange={(e) => { setsearch(e.target.value) }} placeholder="search products..." />
-              <input className="btn btn-info col-2" type="submit" value="Go!" onClick={handleClick} />
-            </form>
-            <p className="lead mt-4">Apply Filters</p>
-            <div className="myfilters">
-              <div className="row">
-                {filters.map((name, index) => {
-                  return (
-                    <div className="row" key={index}>
-                      <div className="col-2">
-                        <label>
-                          <input className="form-check-input" type="checkbox" checked={checkedState[index]} onChange={() => handleOnChange(index)} />
-                        </label>
-                      </div>
-                      <div className="col-10">
-                        <p>{name}</p>
-                      </div>
-                    </div>
-                  )
-                })}
+        {
+          state.shopName ?
+            <div className="row">
+              <div className="col-3 p-5">
+                <button className="btn btn-info mb-2" onClick={customView}>Show Custom View</button>
+                <form className="row">
+                  <input type="text" className="form-control col-10" style={{ width: "150px" }} onChange={(e) => { setsearch(e.target.value) }} placeholder="search products..." />
+                  <input className="btn btn-info col-2" type="submit" value="Go!" onClick={handleClick} />
+                </form>
+                <p className="lead mt-4">Apply Filters</p>
+                <div className="myfilters">
+                  <div className="row">
+                    {filters.map((name, index) => {
+                      return (
+                        <div className="row" key={index}>
+                          <div className="col-2">
+                            <label>
+                              <input className="form-check-input" type="checkbox" checked={checkedState[index]} onChange={() => handleOnChange(index)} />
+                            </label>
+                          </div>
+                          <div className="col-10">
+                            <p>{name}</p>
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
+
+                  <button className="btn btn-info" onClick={applyfilter}>Apply</button>
+
+                </div>
+              </div>
+              <div className="col-9">
+                <div className="row">
+                  {
+                    loading ? <div>Loading.....</div> :
+                      (post && post.length > 0 && hasfilters.length == 0) ?
+                        post.map((ele, i) => {
+
+                          return (
+
+                            <div className="col-4" key={'product-' + i}>
+                              <Link to={"/DisplayProduct/" + ele._id}>
+                                <br></br>
+                                <div className="card" style={{ width: "90%" }}>
+                                  <img className="card-img-top" style={{ width: "100%", height: "150px" }} src={ele.images} alt="Card image cap" />
+                                  <div className="card-body">
+                                    <h5 className="card-title">{ele.name}</h5>
+                                    <div className="buy d-flex justify-content-between align-items-center">
+                                      <div className="price text-info"><h5 className="mt-4">Rs. {ele.cost}</h5></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </Link>
+                            </div>
+
+                          )
+                        })
+                        :
+                        hasfilters.map((ele, i) => {
+                          return (
+
+                            <div className="col-4" key={'product-' + i}>
+                              <Link to={"/DisplayProduct/" + ele._id}>
+                                <br></br>
+                                <div className="card" style={{ width: "90%" }}>
+                                  <img className="card-img-top" style={{ width: "100%", height: "150px" }} src={ele.images} alt="Card image cap" />
+                                  <div className="card-body">
+                                    <h5 className="card-title">{ele.name}</h5>
+                                    <div className="buy d-flex justify-content-between align-items-center">
+                                      <div className="price text-info"><h5 className="mt-4">Rs. {ele.cost}</h5></div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </Link>
+                            </div>
+
+                          )
+                        })
+                  }
+                </div>
               </div>
 
-              <button className="btn btn-info" onClick={applyfilter}>Apply</button>
-
             </div>
-          </div>
-          <div className="col-9">
+            :
             <div className="row">
               {
-                loading ? <div>Loading.....</div> :
-                  (post && post.length > 0 && hasfilters.length == 0) ?
-                    post.map((ele, i) => {
+                (post && post.length > 0 && hasfilters.length == 0) ?
+                  post.map((ele, i) => {
 
-                      return (
-
-                        <div className="col-4" key={'product-' + i}>
-                          <Link to={"/DisplayProduct/" + ele._id}>
-                            <br></br>
-                            <div className="card" style={{ width: "90%" }}>
-                              <img className="card-img-top" style={{ width: "100%", height: "150px" }} src={ele.images} alt="Card image cap" />
-                              <div className="card-body">
-                                <h5 className="card-title">{ele.name}</h5>
-                                <div className="buy d-flex justify-content-between align-items-center">
-                                  <div className="price text-info"><h5 className="mt-4">Rs. {ele.cost}</h5></div>
-                                </div>
-                              </div>
+                    return (
+                      <div className="col-4" key={'product-' + i}>
+                        <br></br>
+                        <div className="card" style={{ width: "90%" }}>
+                          <img className="card-img-top" style={{ width: "100%", height: "150px" }} src={ele.images} alt="Card image cap" />
+                          <div className="card-body">
+                            <h5 className="card-title">{ele.name}</h5>
+                            <div className="buy d-flex justify-content-between align-items-center">
+                              <div className="price text-info"><h5 className="mt-4">Rs. {ele.cost}</h5></div>
                             </div>
-                          </Link>
+                          </div>
                         </div>
-
-                      )
-                    })
-                    :
-                    hasfilters.map((ele, i) => {
-                      return (
-
-                        <div className="col-4" key={'product-' + i}>
-                          <Link to={"/DisplayProduct/" + ele._id}>
-                            <br></br>
-                            <div className="card" style={{ width: "90%" }}>
-                              <img className="card-img-top" style={{ width: "100%", height: "150px" }} src={ele.images} alt="Card image cap" />
-                              <div className="card-body">
-                                <h5 className="card-title">{ele.name}</h5>
-                                <div className="buy d-flex justify-content-between align-items-center">
-                                  <div className="price text-info"><h5 className="mt-4">Rs. {ele.cost}</h5></div>
-                                </div>
-                              </div>
-                            </div>
-                          </Link>
-                        </div>
-
-                      )
-                    })
+                      </div>
+                    )
+                  }) :
+                  <></>
               }
             </div>
-          </div>
-
-        </div>
+        }
         <Footer />
       </>
     )

@@ -9,7 +9,7 @@ const { JWT_SECRET } = require('../config/keys')
 
 router.post('/user/signup', (req, res) => {
     const { name, password, email, address, area, shopName, hasShop } = req.body
-    if (!name || !password || !email || !address || !area || !hasShop) {
+    if (!name || !password || !email || !address || !area) {
         return res.status(422).json({ error: "please add all the fields" })
     }
     else {
@@ -82,7 +82,7 @@ router.route("/user/login").post((req, res) => {
                     if (doMatch) {
                         console.log("doc:", doc)
                         const token = jwt.sign({ _id: doc._id }, JWT_SECRET)
-                        const { _id, email, shopName, hasShop, address, area, productId,name } = doc;
+                        const { _id, email, shopName, hasShop, address, area, productId, name } = doc;
                         res.json({ token, user: { _id, email, shopName, hasShop, address, area, productId, name } })
                     }
                     else {
