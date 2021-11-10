@@ -31,13 +31,13 @@ function NavBar() {
                             state.shopName ?
                                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                     <li className="nav-item">
-                                        <Link to="/shopCreate" className="nav-link active" aria-current="page" style={{ color: "#0dcaf0" }}>Create Shop</Link>
+                                        <Link to="/shopCreate" className="nav-link active" aria-current="page" style={{ color: "#0dcaf0" }}>Add Products</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link to="/shopUpdate" className="nav-link active" style={{ color: "#0dcaf0" }}>Update Shop</Link>
+                                        <Link to="/shopUpdate" className="nav-link active" style={{ color: "#0dcaf0" }}>Update Products</Link>
                                     </li>
                                 </ul> :
-                                <ul class="nav navbar-nav ml-auto">
+                                <ul className="nav navbar-nav ml-auto">
                                     <li className="nav-item">
                                         <Link className="nav-link active" aria-current="page" to="/userHome"><i style={{ color: "#0dcaf0" }} className="fas fa-home"></i></Link>
                                     </li>
@@ -56,6 +56,17 @@ function NavBar() {
                                 </ul>
 
                         }
+                        <ul className="nav navbar-nav ml-auto">
+                            <li className="nav-item">
+                                <Link className="nav-link active" aria-current="page" to="/userHome"><i style={{ color: "#0dcaf0" }} className="fas fa-home"></i></Link>
+                            </li>
+                            <li>
+                                <Link className="nav-link active" to="/userProfile"><i style={{ color: "#0dcaf0" }} className="fas fa-user"></i></Link>
+                            </li>
+                            <li>
+                                <Link className="nav-link active" onClick={logout}><i style={{ color: "#0dcaf0" }} className="fas fa-sign-out-alt"></i></Link>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </nav>

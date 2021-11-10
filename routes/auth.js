@@ -8,11 +8,20 @@ const { JWT_SECRET } = require('../config/keys')
 
 
 router.post('/user/signup', (req, res) => {
-    const { name, password, email, address, area, shopName, hasShop } = req.body
-    if (!name || !password || !email || !address || !area) {
-        return res.status(422).json({ error: "please add all the fields" })
+    const emailcheck = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/
+    const passcheck = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
+    const { name, password, confirmpassword, email, address, area, shopName, hasShop } = req.body
+    if (!name || !password || !confirmpassword || !email || !address || !area) {
+        return res.status(422).json({ error: "Please add all the fields" })
     }
     else {
+        if (!email.match(emailcheck)) {
+            return res.status(422).json({ error: "Please enter a valid email!" })
+        } else if (password != confirmpassword) {
+            return res.status(422).json({ error: "Please enter the same password" })
+        } else if (!password.match(passcheck)) {
+            return res.status(422).json({ error: "Please enter a password with atleast 6 characters, one letter, one special character" })
+        }
         User.findOne({ email: email })
             .then(doc => {
                 if (doc) {

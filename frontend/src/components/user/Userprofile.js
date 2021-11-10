@@ -83,40 +83,6 @@ function Userprofile() {
                         </div>
                     </div>
                 </div>
-                <h3 className="wishlist mx-5" id="order">My orders</h3>
-                <Container>
-                    <Row>
-                        {
-                            loading ? <div>Loading.....</div> :
-                                post && post.length > 0 ? post.map((ele, i) =>
-
-                                    <Col sm={3} key={'product-' + i}>
-                                        <br />
-
-                                        <div class="card" style={{ width: "18rem" }}>
-                                            <img class="card-img-top" style={{ height: "250px" }} src={ele.productId.images} alt="Card image cap" />
-                                            <div class="card-img-overlay d-flex justify-content-end">
-                                                <a href="#" class="card-link text-danger like">
-                                                </a>
-                                            </div>
-                                            <div class="card-body">
-                                                <h5 class="card-title">{ele.productId.name}</h5>
-                                                <h5 class="card-title">Rs. {ele.productId.cost}</h5>
-                                                <div class="buy d-flex justify-content-between align-items-center">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </Col>
-                                ) : <div class="row">
-                                    <div class="text-center">
-                                        <div class="alert alert-info">No products found</div>
-                                    </div>
-                                </div>
-
-                        }
-                    </Row>
-
-                </Container>
                 {
                     state.shopName ?
                         <div className="m-4">
@@ -124,7 +90,42 @@ function Userprofile() {
                             <VisualData />
                         </div>
                         :
-                        <></>
+                        <>
+                            <h3 className="wishlist mx-5" id="order">My orders</h3>
+                            <Container>
+                                <Row>
+                                    {
+                                        loading ? <div>Loading.....</div> :
+                                            post && post.length > 0 ? post.map((ele, i) =>
+
+                                                <Col sm={3} key={'product-' + i}>
+                                                    <br />
+
+                                                    <div class="card" style={{ width: "18rem" }}>
+                                                        <img class="card-img-top" style={{ height: "250px" }} src={ele.productId.images} alt="Card image cap" />
+                                                        <div class="card-img-overlay d-flex justify-content-end">
+                                                            <a href="#" class="card-link text-danger like">
+                                                            </a>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">{ele.productId.name}</h5>
+                                                            <h5 class="card-title">Rs. {ele.productId.cost}</h5>
+                                                            <div class="buy d-flex justify-content-between align-items-center">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </Col>
+                                            ) : <div class="row">
+                                                <div class="text-center">
+                                                    <div class="alert alert-info">No products found</div>
+                                                </div>
+                                            </div>
+
+                                    }
+                                </Row>
+
+                            </Container>
+                        </>
                 }
                 <Footer />
             </>

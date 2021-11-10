@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from "axios";
 import './shop.css';
 import { useHistory, Link } from "react-router-dom";
 import NavBar from './nav';
 import UserLogin from './userLogin';
 import { UserContext } from '../../App'
 import Footer from '../footer';
+import { Col, Container, Row } from 'react-bootstrap';
 
 function UserHome() {
   const [product, setProduct] = useState('');
@@ -128,7 +128,7 @@ function UserHome() {
         <NavBar></NavBar>
 
         {
-          state.shopName ?
+          !state.shopName ?
             <div className="row">
               <div className="col-3 p-5">
                 <button className="btn btn-info mb-2" onClick={customView}>Show Custom View</button>
@@ -212,29 +212,31 @@ function UserHome() {
 
             </div>
             :
-            <div className="row">
-              {
-                (post && post.length > 0 && hasfilters.length == 0) ?
-                  post.map((ele, i) => {
+            <Container>
+              <Row>
+                {
+                  (post && post.length > 0 && hasfilters.length == 0) ?
+                    post.map((ele, i) => {
 
-                    return (
-                      <div className="col-4" key={'product-' + i}>
-                        <br></br>
-                        <div className="card" style={{ width: "90%" }}>
-                          <img className="card-img-top" style={{ width: "100%", height: "150px" }} src={ele.images} alt="Card image cap" />
-                          <div className="card-body">
-                            <h5 className="card-title">{ele.name}</h5>
-                            <div className="buy d-flex justify-content-between align-items-center">
-                              <div className="price text-info"><h5 className="mt-4">Rs. {ele.cost}</h5></div>
+                      return (
+                        <Col sm={4} key={'product-' + i}>
+                          <br></br>
+                          <div className="card" style={{ width: "70%" }}>
+                            <img className="card-img-top" style={{ width: "100%", height: "150px" }} src={ele.images} alt="Card image cap" />
+                            <div className="card-body">
+                              <h5 className="card-title">{ele.name}</h5>
+                              <div className="buy d-flex justify-content-between align-items-center">
+                                <div className="price text-info"><h5 className="mt-4">Rs. {ele.cost}</h5></div>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                    )
-                  }) :
-                  <></>
-              }
-            </div>
+                        </Col>
+                      )
+                    }) :
+                    <></>
+                }
+              </Row>
+            </Container>
         }
         <Footer />
       </>
