@@ -191,7 +191,6 @@ function UserHome() {
                       })
                       :
                       <div className="row">
-                        <div className="alert alert-info">No products found</div>
                       </div>
                   }
                 </div>
