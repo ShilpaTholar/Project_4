@@ -6,6 +6,7 @@ const Product = mongoose.model("Product");
 const User = mongoose.model("User");
 
 router.post('/shop/add/:shopid', requirelogin, (req, res) => {
+    console.log(req.user.area)
     const product = new Product({
         cost: req.body.cost,
         description: req.body.description,
@@ -13,7 +14,8 @@ router.post('/shop/add/:shopid', requirelogin, (req, res) => {
         name: req.body.name,
         images: req.body.images,
         productType: req.body.productType,
-        shopId: req.params.shopid
+        shopId: req.params.shopid,
+        area: req.user.area
     });
     product.save((err, data) => {
         if (data) {
@@ -28,13 +30,15 @@ router.post('/shop/add/:shopid', requirelogin, (req, res) => {
                     res.json(result)
                 }
             })
+        } else {
+            res.json(err)
         }
     });
 });
 
 
 
-router.get('/shop/display/:keyword', (req, res) => {
+router.get('/shop/display/:keyword', requirelogin, (req, res) => {
     Product.find({ name: req.params.keyword }, (err, data) => {
         if (!err) {
             res.send(data);
@@ -45,7 +49,7 @@ router.get('/shop/display/:keyword', (req, res) => {
 
     });
 })
-router.get('/product/view/:id', (req, res) => {
+router.get('/product/view/:id', requirelogin, (req, res) => {
     Product.findById(req.params.id, (err, data) => {
         if (!err) {
             res.send(data);
@@ -61,6 +65,18 @@ router.get('/shop/display', (req, res) => {
     Product.find({}, (err, data) => {
         if (!err) {
             res.send(data);
+        } else {
+            console.log(err);
+        }
+
+    });
+})
+
+router.get('/shop/custom', requirelogin, (req, res) => {
+    Product.find({ area: req.user.area }, (err, data) => {
+        if (!err) {
+            res.send(data);
+
         } else {
             console.log(err);
         }

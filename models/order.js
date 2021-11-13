@@ -7,7 +7,8 @@ const orderSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "User"
     },
-    productId: [{ type: ObjectId, ref: "Product" }]
+    count: { type: Number, required: true },
+    productId: { type: ObjectId, ref: "Product" }
 })
 
 mongoose.model("Order", orderSchema);

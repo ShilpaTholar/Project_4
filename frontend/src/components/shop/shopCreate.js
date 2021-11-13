@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { UserContext } from '../../App'
-//import '../global.css'
+import Footer from '../footer';
+import '../global.css'
+import NavBar from '../user/nav';
 import UserLogin from '../user/userLogin'
 
 function ShopCreate() {
@@ -14,6 +16,8 @@ function ShopCreate() {
     const [quantity, setquantity] = useState(0);
     const [name, setname] = useState("");
     const [url, seturl] = useState("")
+    const [productType, setproductType] = useState("");
+    const filters = ['Ration', 'Desserts', 'Cloths', 'Cosmetics']
 
 
 
@@ -29,6 +33,7 @@ function ShopCreate() {
                     cost,
                     description,
                     quantity,
+                    productType,
                     name,
                     images: url
                 })
@@ -43,6 +48,7 @@ function ShopCreate() {
         }
 
     }, [url])
+
 
     const postimage = (event) => {
         event.preventDefault()
@@ -64,16 +70,21 @@ function ShopCreate() {
             })
     }
 
+    function handleDropdownChange(e) {
+        setproductType(e.target.value);
+    }
+
 
     if (!state) {
         return <UserLogin />
     }
     else {
         return (
-            <div>
+            <div style={{ fontFamily: "cursive" }}>
+                <NavBar />
                 <p className="display-5 text-center mt-5">Create Your Shop {state.shopName} Online!!</p>
                 <div >
-                    <form className="container col-6">
+                    <form className="shopCreateForm container col-6 mb-5 mt-5">
                         <div className="row mb-3">
                             <div className="col">
                                 <label className="form-label">Product Name</label>
@@ -91,12 +102,28 @@ function ShopCreate() {
                             </div>
                             <div className="col">
                                 <label className="form-label">Cost</label>
-                                <input type="text" className="form-control" onChange={(e) => setcost(e.target.value)} placeholder="const" />
+                                <input type="text" className="form-control" onChange={(e) => setcost(e.target.value)} placeholder="cost" />
                             </div>
                         </div>
-                        <div className="row choosefile mb-3">
-                            <label className="form-label">Select images</label>
-                            <input onChange={(e) => setimage(e.target.files[0])} className="form-control" type="file" id="formFile" />
+                        <div className="row mb-3">
+                            <div className="col">
+                                <label>Product Type</label>
+                                <select onChange={handleDropdownChange} className="form-select form-select-sm" aria-label=".form-select-sm example">
+                                    <option selected>Select Type</option>
+                                    {
+                                        filters.map(item => {
+                                            return (
+                                                <option value={item}>{item}</option>
+                                            )
+                                        })
+                                    }
+                                </select>
+                            </div>
+                            <div className="col choosefile">
+                                <label className="form-label">Select images</label>
+                                <input onChange={(e) => setimage(e.target.files[0])} className="form-control" type="file" id="formFile" />
+                            </div>
+
                         </div>
                         <div className="row mb-3">
                             <div className="col">
@@ -111,14 +138,12 @@ function ShopCreate() {
                                 </button>
                             </div>
                             <div className="col">
-                                <button className="btn btn-outline-info">
-                                    Add More!
-                                </button>
+                                <input type="Reset" className="btn btn-outline-info" value="Add More!" />
                             </div>
                         </div>
                     </form>
                 </div>
-
+                <Footer />
             </div>
         )
     }

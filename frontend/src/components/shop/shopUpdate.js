@@ -3,6 +3,8 @@ import { UserContext } from '../../App'
 import { Link } from 'react-router-dom'
 import UserLogin from '../user/userLogin';
 import Modal from 'react-modal';
+import Footer from '../footer'
+import NavBar from '../user/nav';
 
 function ShopUpdate() {
 
@@ -76,7 +78,8 @@ function ShopUpdate() {
     }
     else {
         return (
-            <div>
+            <div style={{ fontFamily: "cursive" }}>
+                <NavBar />
                 <p className="display-5 text-center mt-5">Update Your Shop {state.shopName}</p>
                 <div className="row justify-content-center">
                     <table style={{ width: "70%" }} className="table table-hover table-info">
@@ -139,6 +142,7 @@ function ShopUpdate() {
                     </Modal>
 
                 </div>
+                <Footer />
             </div>
         )
     }

@@ -1,0 +1,10 @@
+.myfooter h5{
+    font-family: 'Courgette', cursive;
+  }
+  .myfooter {
+    background-color: rgba(70, 87, 241, 0.05);
+    color:rgba(2, 133, 255, 0.692);
+    padding: 20px 50px;
+    width: 100%;
+    margin: 0%;
+  }

@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { UserContext } from '../../App'
+import Footer from '../footer'
+import NavBar from '../user/nav'
 import UserLogin from '../user/userLogin'
 
 function ShopEdit() {
@@ -120,9 +122,10 @@ function ShopEdit() {
     }
     else {
         return (
-            <div>
-                <p className="display-5 text-center mt-5">Edit Your Shop {state.shopName}</p>
-                <div className="container col-6 shopCreateForm">
+            <div style={{ fontFamily: "cursive" }}>
+                <NavBar />
+                <p className="display-5 text-center mt-5" >Edit Your Shop {state.shopName}</p>
+                <div className="container col-6 shopCreateForm mb-5">
                     <form>
                         <div className="row">
                             <div className="col">
@@ -188,6 +191,7 @@ function ShopEdit() {
                         </div>
                     </form>
                 </div>
+                <Footer />
             </div>
         )
     }
